@@ -80,7 +80,7 @@
 
                     <td>
                         <i class="bi bi-clock"></i>
-                        @ticket.FechaEntrada.ToCR().ToString("g")
+                        @ticket.FechaEntrada.ToCR12H()
                     </td>
 
                     <td>
@@ -88,7 +88,7 @@
                         {
                             <span>
                                 <i class="bi bi-box-arrow-right"></i>
-                                @ticket.FechaSalida.Value.ToCR().ToString("g")
+                                @ticket.FechaSalida.Value.ToCR12H()
                             </span>
                         }
                         else

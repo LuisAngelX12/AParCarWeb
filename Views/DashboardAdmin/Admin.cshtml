@@ -191,7 +191,7 @@
                             </td>
                             <td>
                                 <i class="bi bi-clock"></i>
-                                @n.Fecha.ToCR().ToString("g")
+                                @n.Fecha.ToCR12H()
                             </td>
                         </tr>
                     }
@@ -249,7 +249,7 @@ else
 
                             <td>
                                 <i class="bi bi-clock"></i>
-                                @r.FechaGeneracion.ToCR().ToString("g")
+                                @r.FechaGeneracion.ToCR12H()
                             </td>
 
                         </tr>

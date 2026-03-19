@@ -1,6 +1,7 @@
 ﻿namespace AParCarWeb.Controllers
 {
     using AParCarWeb.Data;
+    using AParCarWeb.Extensions;
     using AParCarWeb.Helpers;
     using AParCarWeb.Models;
     using AParCarWeb.Services;
@@ -373,7 +374,7 @@
                     {
                         UserName = user.UserName ?? "Usuario",
                         Amount = pago.Monto,
-                        Fecha = TimeHelper.ToCostaRicaTime(pago.FechaPago).ToString("g"),
+                        Fecha = pago.FechaPago.ToCR12H(),
                         Detalle = $"Espacio: {ticket.Espacio?.Codigo ?? "N/A"} | Ticket #{ticket.TicketId}",
                         MetodoPago = pago.MetodoPago,
                         Referencia = pago.TransaccionId,

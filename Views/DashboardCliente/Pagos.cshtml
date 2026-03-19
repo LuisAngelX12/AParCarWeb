@@ -26,7 +26,7 @@
         @foreach (var p in Model)
         {
             <tr>
-                <td>@p.FechaPago.ToCR().ToString("g")</td>
+                <td>@p.FechaPago.ToCR12H()</td>
                 <td>₡ @p.Monto</td>
                 <td>@p.MetodoPago</td>
             </tr>

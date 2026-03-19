@@ -100,12 +100,12 @@
                     </td>
 
                     <td class="text-center">
-                        @t.FechaEntrada.ToCR().ToString("g")
+                        @t.FechaEntrada.ToCR12H()
                     </td>
 
                     <td class="text-center">
                         @(t.FechaSalida != null
-                            ? t.FechaSalida.Value.ToCR().ToString("g")
+                            ? t.FechaSalida.Value.ToCR12H()
                             : "—")
                     </td>
 
