@@ -2,4 +2,4 @@
 # Archivos de entorno / secretos
 # ===============================
 .env
-
+.vs/
