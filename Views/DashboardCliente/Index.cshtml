@@ -1,4 +1,5 @@
 ﻿@model AParCarWeb.Models.Cliente
+@using AParCarWeb.Extensions
 
 @{
     ViewData["Title"] = "Mi Dashboard";
@@ -237,7 +238,7 @@
                     </td>
 
                     <td>
-                        @t.FechaEntrada.ToLocalTime().ToString("g")
+                        @t.FechaEntrada.ToCR().ToString("g")
                     </td>
 
                     <td>

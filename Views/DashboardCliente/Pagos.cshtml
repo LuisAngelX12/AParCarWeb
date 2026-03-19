@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AParCarWeb.Models.Pago>
+@using AParCarWeb.Extensions
 @{
     ViewData["Title"] = "Mis Pagos";
 }
@@ -25,7 +26,7 @@
         @foreach (var p in Model)
         {
             <tr>
-                <td>@p.FechaPago.ToLocalTime().ToString("g")</td>
+                <td>@p.FechaPago.ToCR().ToString("g")</td>
                 <td>₡ @p.Monto</td>
                 <td>@p.MetodoPago</td>
             </tr>

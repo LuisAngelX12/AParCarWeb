@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AParCarWeb.Models.Ticket>
+@using AParCarWeb.Extensions
 
 @{
     ViewData["Title"] = "Historial de Parqueos";
@@ -99,12 +100,12 @@
                     </td>
 
                     <td class="text-center">
-                        @t.FechaEntrada.ToLocalTime().ToString("g")
+                        @t.FechaEntrada.ToCR().ToString("g")
                     </td>
 
                     <td class="text-center">
                         @(t.FechaSalida != null
-                            ? t.FechaSalida.Value.ToLocalTime().ToString("g")
+                            ? t.FechaSalida.Value.ToCR().ToString("g")
                             : "—")
                     </td>
 

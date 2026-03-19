@@ -1,6 +1,7 @@
 ﻿namespace AParCarWeb.Controllers
 {
     using AParCarWeb.Data;
+    using AParCarWeb.Helpers;
     using AParCarWeb.Models;
     using AParCarWeb.Services;
     using AParCarWeb.Templates.Email.ViewModels;
@@ -372,7 +373,7 @@
                     {
                         UserName = user.UserName ?? "Usuario",
                         Amount = pago.Monto,
-                        Fecha = pago.FechaPago.ToLocalTime().ToString("g"),
+                        Fecha = TimeHelper.ToCostaRicaTime(pago.FechaPago).ToString("g"),
                         Detalle = $"Espacio: {ticket.Espacio?.Codigo ?? "N/A"} | Ticket #{ticket.TicketId}",
                         MetodoPago = pago.MetodoPago,
                         Referencia = pago.TransaccionId,

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AParCarWeb.Models.Ticket>
+@using AParCarWeb.Extensions
 
 @{
     ViewData["Title"] = "Tickets";
@@ -79,7 +80,7 @@
 
                     <td>
                         <i class="bi bi-clock"></i>
-                        @ticket.FechaEntrada.ToString("g")
+                        @ticket.FechaEntrada.ToCR().ToString("g")
                     </td>
 
                     <td>
@@ -87,7 +88,7 @@
                         {
                             <span>
                                 <i class="bi bi-box-arrow-right"></i>
-                                @ticket.FechaSalida.Value.ToString("g")
+                                @ticket.FechaSalida.Value.ToCR().ToString("g")
                             </span>
                         }
                         else

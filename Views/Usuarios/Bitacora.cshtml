@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AParCarWeb.Models.BitacoraAcceso>
+@using AParCarWeb.Extensions
 
 @{
     ViewData["Title"] = "Bitácora de Accesos";
@@ -28,7 +29,7 @@
             <tr>
                 <td>@item.Usuario!.Nombre</td>
                 <td>@item.Accion</td>
-                <td>@item.FechaHora.ToLocalTime().ToString("g")</td>
+                <td>@item.FechaHora.ToCR().ToString("g")</td>
                 <td>@item.IP</td>
             </tr>
         }
