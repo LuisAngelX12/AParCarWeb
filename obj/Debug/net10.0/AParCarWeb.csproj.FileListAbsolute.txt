@@ -490,3 +490,4 @@ C:\Users\X_X\source\repos\AParCarWeb\obj\Debug\net10.0\refint\AParCarWeb.dll
 C:\Users\X_X\source\repos\AParCarWeb\obj\Debug\net10.0\AParCarWeb.pdb
 C:\Users\X_X\source\repos\AParCarWeb\obj\Debug\net10.0\AParCarWeb.genruntimeconfig.cache
 C:\Users\X_X\source\repos\AParCarWeb\obj\Debug\net10.0\ref\AParCarWeb.dll
+C:\Users\X_X\source\repos\AParCarWeb\obj\Debug\net10.0\AParCarWeb.sourcelink.json

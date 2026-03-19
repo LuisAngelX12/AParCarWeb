@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AParCarWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+654b4fb9e492c3fc78a9323676d7bfdd84f79bf9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d3e28fd5a0187cfec9ee5f3c333adaae84361d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("AParCarWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AParCarWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
