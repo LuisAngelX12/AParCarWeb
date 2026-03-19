@@ -1,0 +1,34 @@
+﻿@using AParCarWeb.Data
+@using AParCarWeb.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<ul class="nav flex-column gap-1">
+
+    <li class="nav-item">
+        <a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)"
+           asp-page="./Email">
+            Email
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)"
+           asp-page="./ChangePassword">
+            Contraseña
+        </a>
+    </li>
+
+    @if (hasExternalLogins)
+    {
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)"
+               asp-page="./ExternalLogins">
+                Logins externos
+            </a>
+        </li>
+    }
+
+</ul>

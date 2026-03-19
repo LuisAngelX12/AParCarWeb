@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-AParCarWeb-288e899b-1c40-4d66-aa80-43d648d02453</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Braintree" Version="5.38.0" />
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="DotNetEnv" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
+    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.4" />
+    <PackageReference Include="QuestPDF" Version="2025.12.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\parking\" />
+  </ItemGroup>
+
+</Project>

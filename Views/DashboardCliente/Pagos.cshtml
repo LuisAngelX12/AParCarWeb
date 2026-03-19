@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AParCarWeb.Models.Pago>
+@{
+    ViewData["Title"] = "Mis Pagos";
+}
+
+<div style="height:30px;"></div>
+
+<h2>
+    <i class="bi bi-credit-card"></i> Historial de Pagos
+</h2>
+
+<div class="mb-3 col-md-4">
+    <input type="text" id="searchInput" class="form-control" placeholder="Buscar por fecha, monto o método...">
+</div>
+
+<table class="table table-hover" id="pagosTable">
+    <thead class="table-light">
+        <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Método</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.FechaPago.ToLocalTime().ToString("g")</td>
+                <td>₡ @p.Monto</td>
+                <td>@p.MetodoPago</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">
+    <i class="bi bi-arrow-left"></i> Volver
+</a>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const table = document.getElementById('pagosTable').getElementsByTagName('tbody')[0];
+
+    searchInput.addEventListener('input', () => {
+        const filter = searchInput.value.toLowerCase();
+
+        Array.from(table.rows).forEach(row => {
+            const rowText = Array.from(row.cells)
+                                 .map(cell => cell.innerText.toLowerCase())
+                                 .join(' ');
+
+            row.style.display = rowText.includes(filter) ? '' : 'none';
+        });
+    });
+</script>

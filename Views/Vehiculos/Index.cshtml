@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AParCarWeb.Models.Vehiculo>
+
+@{
+    ViewData["Title"] = "Vehículos";
+}
+
+<div style="height:30px;"></div>
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Color</th>
+            <th>Clientes Asociados</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Placa</td>
+                <td>@v.Marca</td>
+                <td>@v.Modelo</td>
+                <td>@v.Color</td>
+                <td>
+                    @foreach (var cv in v.ClienteVehiculos!)
+                    {
+                        <span class="badge bg-secondary">@cv.Cliente!.Nombre</span>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = v.VehiculoId })" class="btn btn-sm btn-warning">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

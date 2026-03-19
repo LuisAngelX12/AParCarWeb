@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AParCarWeb.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<div style="height:30px;"></div>
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Identificación</th>
+            <th>Tipo Cliente</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Usuario</th>
+            <th>Estado Usuario</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Nombre</td>
+                <td>@c.Identificacion</td>
+                <td>@c.TipoCliente</td>
+                <td>@c.Telefono</td>
+                <td>@c.Email</td>
+                <td>@c.Usuario?.Nombre</td>
+                <td>
+                    @if (c.Usuario?.EstadoUsuario == "Activo")
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactivo</span>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Usuarios", new { id = c.ClienteId })" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="@Url.Action("Details", new { id = c.ClienteId })" class="btn btn-sm btn-info">Detalles</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

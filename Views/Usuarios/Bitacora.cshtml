@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AParCarWeb.Models.BitacoraAcceso>
+
+@{
+    ViewData["Title"] = "Bitácora de Accesos";
+}
+
+<div style="height:30px;"></div>
+
+<h2>@ViewData["Title"]</h2>
+
+<!-- Filtro -->
+<div class="mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Buscar usuario, acción o IP..." />
+</div>
+
+<table class="table table-bordered table-striped" id="bitacoraTable">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Acción</th>
+            <th>Fecha y Hora</th>
+            <th>IP</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Usuario!.Nombre</td>
+                <td>@item.Accion</td>
+                <td>@item.FechaHora.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")</td>
+                <td>@item.IP</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Script de filtrado -->
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const table = document.getElementById('bitacoraTable').getElementsByTagName('tbody')[0];
+
+    searchInput.addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        const rows = table.getElementsByTagName('tr');
+
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName('td');
+            let match = false;
+
+            for (let j = 0; j < cells.length; j++) {
+                if (cells[j].textContent.toLowerCase().includes(filter)) {
+                    match = true;
+                    break;
+                }
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+</script>

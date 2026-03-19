@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script>
+        (function() {
+            const darkMode = localStorage.getItem("darkMode") === "true";
+            if (darkMode) {
+                document.documentElement.classList.add("dark-mode");
+            }
+        })();
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AParCarWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/parking.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+    @if (ViewData["Identity"] as bool? == true)
+    {
+        <link rel="stylesheet" href="~/css/identity.css" />
+    }
+
+    <link rel="stylesheet" href="~/AParCarWeb.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+
+                <!-- Brand logo -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Aparcar">
+                    <img src="~/img/Logo.png" alt="AParCarWeb" class="navbar-logo">
+                    <span class="visually-hidden">AParCarWeb</span>
+                </a>
+
+                <!-- Toggler -->
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar content -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <!-- Left menu -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        @if (User?.Identity?.IsAuthenticated == true)
+                        {
+                            @if (User?.IsInRole("Cliente") == true)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Reservas" asp-action="MisReservas">
+                                        Historial Pagos
+                                    </a>
+                                </li>
+                            }
+
+                            @if (User?.IsInRole("Admin") == true)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Reportes" asp-action="HistorialClienteVehiculo">
+                                        Cliente-Vehiculo
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Zonas" asp-action="Index">
+                                        Zonas                                        
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Tarifas" asp-action="Index">
+                                        Tarifas                                        
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Usuarios" asp-action="Bitacora">
+                                        Bitacora-Accesos
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="ConfiguracionesSistema" asp-action="Index">
+                                        Configuraciones
+                                    </a>
+                                </li>
+                            }
+
+                            @if (User?.IsInRole("Operador") == true)
+                            {
+
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Privacy">
+                                    Privacidad
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="About">
+                                    Nosotros
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- Right menu -->
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <!-- Botón de Dark Mode -->
+                        <li class="nav-item me-3">
+                            <!-- me-3 agrega margen a la derecha -->
+                            <button id="darkModeToggle" class="btn btn-outline-light btn-sm" title="Toggle Dark Mode">
+                                <i id="icon" class="bi bi-sun"></i>
+                            </button>
+                        </li>
+
+                        <!-- Login Partial separado -->
+                        <li class="nav-item">
+                            <partial name="_LoginPartial" />
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - AParCarWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        function toggleDarkMode() {
+            const html = document.documentElement;
+
+            // Cambiar dark mode
+            html.classList.toggle("dark-mode");
+
+            // Activar transición solo durante toggle
+            html.classList.add("transition-enabled");
+
+            // Guardar preferencia
+            localStorage.setItem("darkMode", html.classList.contains("dark-mode"));
+
+            // Quitar transición después de 500ms
+            setTimeout(() => html.classList.remove("transition-enabled"), 500);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleBtn = document.getElementById("darkModeToggle");
+            if (toggleBtn) toggleBtn.addEventListener("click", toggleDarkMode);
+        });
+    </script>
+
+    <script>
+          const darkModeToggle = document.getElementById('darkModeToggle');
+          const icon = document.getElementById('icon');
+
+          darkModeToggle.addEventListener('click', () => {
+            // Si el icono es el sol (modo claro), cambia a luna (modo oscuro)
+            if (icon.classList.contains('bi-sun')) {
+              icon.classList.remove('bi-sun', 'text-dark'); // Eliminar sol y color de texto claro
+        icon.classList.add('bi-moon', 'text-light'); // Agregar luna y color de texto claro
+        document.body.classList.add('dark-mode');
+            } else {
+              // Si el icono es la luna (modo oscuro), cambia a sol (modo claro)
+              icon.classList.remove('bi-moon');
+              icon.classList.add('bi-sun');
+              icon.style.color = '#000'; // Cambiar color a negro para el modo claro
+              document.body.classList.remove('dark-mode'); // Cambiar el tema a claro (puedes añadir tu propia lógica)
+            }
+          });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

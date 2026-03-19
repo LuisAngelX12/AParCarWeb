@@ -1,0 +1,171 @@
+﻿@model IEnumerable<AParCarWeb.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Historial de Parqueos";
+}
+
+<style>
+    .historial-container {
+        margin-top: 30px;
+    }
+
+    .color-auto {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: inline-block;
+        border: 1px solid #ccc;
+        margin-right: 6px;
+    }
+</style>
+
+<div class="container historial-container">
+
+    <h2 class="mb-4">
+        <i class="bi bi-clock-history"></i>
+        Historial de Parqueos
+    </h2>
+
+    <div class="mb-3">
+        <input type="text"
+               id="filtroTabla"
+               class="form-control"
+               placeholder="Filtrar historial...">
+    </div>
+
+    <table class="table table-bordered table-hover" id="tablaHistorial">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Vehículo</th>
+                <th>Espacio</th>
+                <th>Entrada</th>
+                <th>Salida</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var t in Model)
+            {
+                var colorData = t.Vehiculo?.Color ?? "";
+                var hex = colorData.Contains("#") ? colorData.Split(" - ")[0] : "#999";
+                var nombreColor = colorData.Contains(" - ") ? colorData.Split(" - ")[1] : colorData;
+
+                <tr>
+
+                    <td>
+
+                        <div class="fw-bold">
+                            <i class="bi bi-car-front"></i>
+                            @t.Vehiculo?.Placa
+                        </div>
+
+                        <div class="text-muted small">
+                            @t.Vehiculo?.Marca @t.Vehiculo?.Modelo
+                        </div>
+
+                        <div class="small">
+
+                            <span class="color-auto"
+                                  style="background:@hex">
+                            </span>
+
+                            @nombreColor
+
+                        </div>
+
+                    </td>
+
+                    <td class="text-center">
+
+                        @if (t.Espacio != null)
+                        {
+                            <div class="fw-bold">
+                                <i class="bi bi-p-square"></i>
+                                Espacio @t.Espacio.Codigo
+                            </div>
+
+                            <div class="text-muted small">
+                                @t.Espacio.Zona?.Nombre
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="text-muted">—</span>
+                        }
+
+                    </td>
+
+                    <td class="text-center">
+                        @t.FechaEntrada.ToLocalTime().ToString("g")
+                    </td>
+
+                    <td class="text-center">
+                        @(t.FechaSalida != null
+                            ? t.FechaSalida.Value.ToLocalTime().ToString("g")
+                            : "—")
+                    </td>
+
+                    <td class="text-center">
+
+                        @switch (t.Estado)
+                        {
+                            case "Activo":
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle"></i>
+                                    Activo
+                                </span>
+                                break;
+
+                            case "Pagado":
+                                <span class="badge bg-primary">
+                                    <i class="bi bi-cash-stack"></i>
+                                    Pagado
+                                </span>
+                                break;
+
+                            default:
+                                <span class="badge bg-danger">
+                                    <i class="bi bi-x-circle"></i>
+                                    Cancelado
+                                </span>
+                                break;
+                        }
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i>
+        Volver
+    </a>
+
+</div>
+
+<script>
+
+    document.getElementById("filtroTabla").addEventListener("keyup", function () {
+
+    let filtro = this.value.toLowerCase();
+    let filas = document.querySelectorAll("#tablaHistorial tbody tr");
+
+    filas.forEach(function(fila){
+
+        let texto = fila.textContent.toLowerCase();
+
+        fila.style.display = texto.includes(filtro)
+            ? ""
+            : "none";
+
+    });
+
+    });
+
+</script>

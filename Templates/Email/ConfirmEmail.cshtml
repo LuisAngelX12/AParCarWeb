@@ -1,0 +1,33 @@
+﻿@using AParCarWeb.Templates.Email.ViewModels
+@model ConfirmEmailViewModel
+
+<div style="font-family: Arial; background:#f4f6f8; padding:20px;">
+    <div style="max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:10px; border:1px solid #ddd;">
+
+        <h2 style="text-align:center;">Confirmar cambio de correo</h2>
+
+        <div style="text-align:center; margin:20px;">
+            <svg width="60" height="60" fill="#ffc107" viewBox="0 0 16 16">
+                <path d="M8 1a7 7 0 1 0 7 7H8V1z" />
+            </svg>
+        </div>
+
+        <p>Hola <strong>@(Model?.UserName ?? "Usuario")</strong>,</p>
+
+        <p>
+            Has solicitado cambiar tu correo electrónico en AParCar.
+        </p>
+
+        <div style="text-align:center; margin:25px 0;">
+            <a href="@Model?.CallbackUrl"
+                   style="background:#ffc107; color:black; padding:12px 20px; text-decoration:none; border-radius:5px;">
+                Confirmar cambio
+            </a>
+        </div>
+
+        <p style="font-size:12px; color:#777;">
+            Si no realizaste esta solicitud, ignora este correo.
+        </p>
+
+    </div>
+</div>

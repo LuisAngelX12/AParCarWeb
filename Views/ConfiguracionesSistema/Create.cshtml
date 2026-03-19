@@ -1,0 +1,54 @@
+﻿@model AParCarWeb.Models.ConfiguracionSistema
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div style="height:30px;"></div>
+
+<h4>ConfiguracionSistema</h4>
+<h1 class="mb-3">
+    <i class="bi bi-sliders me-2"></i>@ViewData["Title"]
+</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="@ViewData["Title"]">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Clave" class="form-label">
+                    <i class="bi bi-key me-1"></i>Clave
+                </label>
+                <input asp-for="Clave" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Valor" class="form-label">
+                    <i class="bi bi-input-cursor-text me-1"></i>Valor
+                </label>
+                <input asp-for="Valor" class="form-control" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Descripcion" class="form-label">
+                    <i class="bi bi-card-text me-1"></i>Descripción
+                </label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a href="javascript:history.back()" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Volver
+                </a>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i>Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

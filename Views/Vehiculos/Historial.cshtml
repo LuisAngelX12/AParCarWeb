@@ -1,0 +1,28 @@
+﻿@using AParCarWeb.Models;
+@model List<ClienteVehiculo>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Desde</th>
+            <th>Hasta</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Vehiculo!.Placa</td>
+                <td>@item.Vehiculo.Marca</td>
+                <td>@item.Vehiculo.Modelo</td>
+                <td>@item.FechaInicio.ToShortDateString()</td>
+                <td>@(item.FechaFin?.ToShortDateString() ?? "Actual")</td>
+                <td>@(item.Activo ? "Activo" : "Finalizado")</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AParCarWeb.Models
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var currentPageName = ViewContext.RouteData.Values["page"]?.ToString();
+}
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item me-3">
+            <!-- me-3 agrega margen a la derecha -->
+            <a class="nav-link btn btn-link p-0"
+               asp-area="Identity"
+               asp-page="/Account/Manage/Email"
+               title="Manage">
+                Hola @User.Identity?.Name!
+            </a>
+        </li>
+
+        <li class="nav-item me-3">
+            @{
+                var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+                var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+            }
+
+            @if (currentController == "DashboardAdmin" && currentAction == "Admin" ||
+                    currentController == "DashboardOperador" && currentAction == "Index" ||
+                    currentController == "DashboardCliente" && currentAction == "Index")
+            {
+                <form class="d-inline"
+                      asp-area="Identity"
+                      asp-page="/Account/Logout"
+                      asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link p-0">
+                        Logout
+                    </button>
+                </form>
+            }
+            else
+            {
+                <a class="nav-link btn btn-link p-0"
+                   asp-controller="Home"
+                   asp-action="Aparcar">
+                    Volver a Aparcar
+                </a>
+            }
+        </li>
+    }
+    else
+    {
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            if (currentPageName == "/Account/Register")
+            {
+                <li class="nav-item">
+                    <a class="nav-link btn"
+                       asp-area="Identity"
+                       asp-page="/Account/Login">
+                        Iniciar Sesión
+                    </a>
+                </li>
+            }
+            else if (currentPageName == "/Account/Login")
+            {
+                <li class="nav-item">
+                    <a class="nav-link"
+                       asp-area="Identity"
+                       asp-page="/Account/Register">
+                        Registrarse
+                    </a>
+                </li>
+            }
+        }
+    }
+</ul>

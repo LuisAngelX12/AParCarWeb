@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AParCarWeb.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<div style="height:30px;"></div>
+
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create")" class="btn btn-primary mb-3">Agregar Usuario</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email (Identity)</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Nombre</td>
+                <td>
+                    @* Se puede mostrar el email del IdentityUser si es necesario *@
+                    @u.IdentityUserId
+                </td>
+                <td>
+                    @* Aquí podrías cargar el rol desde Identity si lo deseas *@
+                    <span class="badge bg-info">Rol</span>
+                </td>
+                <td>
+                    @if (u.EstadoUsuario == "Activo")
+                    {
+                        <span class="badge bg-success">@u.EstadoUsuario</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">@u.EstadoUsuario</span>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = u.UsuarioId })" class="btn btn-sm btn-warning">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

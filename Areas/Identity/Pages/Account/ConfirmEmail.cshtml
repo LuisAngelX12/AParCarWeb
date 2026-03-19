@@ -1,0 +1,48 @@
+﻿@page
+@model ConfirmEmailModel
+
+@{
+    ViewData["Title"] = "Confirmar correo";
+}
+
+<body class="identity-bg identity-animate">
+
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
+
+                <div class="card identity-card border-0 overflow-hidden">
+                    <div class="row g-0">
+
+                        <!-- BRAND -->
+                        <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center identity-brand">
+                            <div class="p-5 text-center text-white">
+                                <h2 class="fw-bold mb-3">AParCar Web</h2>
+                                <p class="opacity-75">
+                                    Confirmación de correo electrónico
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- CONTENT -->
+                        <div class="col-md-6 p-5 text-center">
+                            <h3 class="fw-bold mb-3">Correo confirmado 
+                                <i class="bi bi-check-square"></i>
+                                </h3>
+
+                            <partial name="_StatusMessage" model="Model.StatusMessage" />
+
+                            <a asp-page="./Login"
+                               class="btn btn-dark mt-4 px-4 fw-semibold">
+                                Ir a iniciar sesión
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>

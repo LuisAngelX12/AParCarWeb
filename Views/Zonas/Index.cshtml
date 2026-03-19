@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AParCarWeb.Models.Zona>
+
+@{
+    ViewData["Title"] = "Zonas";
+}
+
+<div style="height:30px;"></div>
+
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create")" class="btn btn-primary mb-3">
+    Agregar Zona
+</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var z in Model)
+        {
+            <tr>
+                <td>@z.Nombre</td>
+                <td>@z.Descripcion</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = z.ZonaId })"
+                           class="btn btn-sm btn-warning">
+                        Editar
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

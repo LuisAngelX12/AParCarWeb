@@ -1,0 +1,37 @@
+﻿@page
+@model LockoutModel
+@{
+    ViewData["Title"] = "Cuenta bloqueada";
+}
+
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+    <div class="card shadow-lg border-0 text-center p-4" style="max-width:450px;">
+
+        <div class="card-body">
+
+            <div class="mb-4">
+                <i class="bi bi-person-lock text-danger" style="font-size:60px;"></i>
+            </div>
+
+            <h1 class="h3 text-danger fw-bold mb-3">
+                @ViewData["Title"]
+            </h1>
+
+            <p class="text-muted mb-3">
+                Tu cuenta ha sido bloqueada por la administración del sistema.
+            </p>
+
+            <p class="text-muted">
+                Si crees que esto es un error o necesitas acceso nuevamente,
+                por favor contacta a soporte técnico.
+            </p>
+
+            <div class="mt-4">
+                <a asp-page="/Index" class="btn btn-primary w-100">
+                    Volver al inicio
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Ocupación del Parqueo";
+}
+
+<div style="height:200px;"></div>
+
+<div class="container-fluid">
+
+    <h1 class="mb-4">
+        <i class="bi bi-pie-chart"></i>
+        Ocupación del Parqueo
+    </h1>
+
+    <div class="row g-4">
+
+        <!-- Total Espacios -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-start border-primary border-4 h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-grid fs-1 text-primary"></i>
+                    <h6 class="text-muted mt-2">Total Espacios</h6>
+                    <h2>@ViewBag.Total</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ocupados -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-start border-danger border-4 h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-car-front-fill fs-1 text-danger"></i>
+                    <h6 class="text-muted mt-2">Ocupados</h6>
+                    <h2>@ViewBag.Ocupados</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disponibles -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-start border-success border-4 h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-square fs-1 text-success"></i>
+                    <h6 class="text-muted mt-2">Disponibles</h6>
+                    <h2>@ViewBag.Disponibles</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Porcentaje Ocupación -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-start border-info border-4 h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-percent fs-1 text-info"></i>
+                    <h6 class="text-muted mt-2">Porcentaje</h6>
+                    <h2>@ViewBag.Porcentaje.ToString("0.##") %</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de Progreso -->
+        <div class="col-12">
+            <div class="card shadow-sm border-start border-secondary border-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted">Progreso de Ocupación</h6>
+                    <div class="progress" style="height: 30px;">
+                        <div class="progress-bar" role="progressbar"
+                             style="width: @ViewBag.Porcentaje%"
+                             aria-valuenow="@ViewBag.Porcentaje" aria-valuemin="0" aria-valuemax="100">
+                            @ViewBag.Porcentaje.ToString("0.##") %
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

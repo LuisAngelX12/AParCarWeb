@@ -1,0 +1,27 @@
+﻿@model IEnumerable<AParCarWeb.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes sin Vehículo";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Nombre</td>
+                <td>@c.Email</td>
+                <td>@c.Telefono</td>
+            </tr>
+        }
+    </tbody>
+</table>

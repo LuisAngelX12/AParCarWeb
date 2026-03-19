@@ -1,0 +1,103 @@
+﻿@model AParCarWeb.Models.Ticket
+
+@{
+    ViewData["Title"] = "Editar Ticket";
+}
+
+<div style="height:100px;"></div>
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <!-- Header -->
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="bi bi-pencil-square"></i> Editar Ticket
+            </h4>
+
+            <span class="badge bg-light text-dark">
+                ID: @Model.TicketId
+            </span>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="TicketId" />
+
+                <div class="row g-4">
+
+                    <!-- Vehículo -->
+                    <div class="col-md-6">
+                        <label asp-for="VehiculoId" class="form-label fw-semibold">Vehículo</label>
+                        <select asp-for="VehiculoId" class="form-select" asp-items="@(ViewData["VehiculoId"] as SelectList)">
+                        </select>
+                        <span asp-validation-for="VehiculoId" class="text-danger"></span>
+                    </div>
+
+                    <!-- Espacio -->
+                    <div class="col-md-6">
+                        <label asp-for="EspacioId" class="form-label fw-semibold">Espacio</label>
+                        <select asp-for="EspacioId" class="form-select" asp-items="@(ViewData["EspacioId"] as SelectList)">
+                        </select>
+                        <span asp-validation-for="EspacioId" class="text-danger"></span>
+                    </div>
+
+                    <!-- Fecha Entrada -->
+                    <div class="col-md-6">
+                        <label asp-for="FechaEntrada" class="form-label fw-semibold">Fecha Entrada</label>
+                        <input asp-for="FechaEntrada" type="datetime-local" class="form-control" />
+                        <span asp-validation-for="FechaEntrada" class="text-danger"></span>
+                    </div>
+
+                    <!-- Fecha Salida -->
+                    <div class="col-md-6">
+                        <label asp-for="FechaSalida" class="form-label fw-semibold">Fecha Salida</label>
+                        <input asp-for="FechaSalida" type="datetime-local" class="form-control" />
+                        <span asp-validation-for="FechaSalida" class="text-danger"></span>
+                    </div>
+
+                    <!-- Estado con Badge -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Estado</label>
+                        <div class="mb-2">
+                            @if (Model.Estado == "Activo")
+                            {
+                                <span class="badge bg-success fs-6">Activo</span>
+                            }
+                            else if (Model.Estado == "Pagado")
+                            {
+                                <span class="badge bg-primary fs-6">Pagado</span>
+                            }
+                        </div>
+                        <!-- Hidden select para enviar el valor en el form -->
+                        <select asp-for="Estado" class="form-select d-none">
+                            <option value="Activo" selected="@(Model.Estado == "Activo")">Activo</option>
+                            <option value="Pagado" selected="@(Model.Estado == "Pagado")">Pagado</option>
+                        </select>
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <!-- Footer botones -->
+                <div class="mt-4 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Actualizar
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

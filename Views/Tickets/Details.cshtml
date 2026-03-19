@@ -1,0 +1,91 @@
+﻿@model AParCarWeb.Models.Ticket
+
+@{
+    ViewData["Title"] = "Detalle del Ticket";
+}
+
+<div style="height:100px;"></div>
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <!-- Header -->
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="bi bi-file-earmark-text"></i> Detalle del Ticket
+            </h4>
+
+            <span class="badge bg-light text-dark">
+                ID: @Model.TicketId
+            </span>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Vehículo</label>
+                    <div class="fs-5 fw-bold">
+                        @Model.Vehiculo?.Marca @Model.Vehiculo?.Modelo
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Placa</label>
+                    <div class="fs-5">
+                        @Model.Vehiculo?.Placa
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Espacio</label>
+                    <div class="fs-5">
+                        @Model.Espacio?.Codigo
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Fecha Entrada</label>
+                    <div class="fs-5">
+                        @Model.FechaEntrada.ToString("dd/MM/yyyy HH:mm")
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Fecha Salida</label>
+                    <div class="fs-5">
+                        @(Model.FechaSalida.HasValue? Model.FechaSalida.Value.ToString("dd/MM/yyyy HH:mm") : "-")
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Estado</label>
+                    <div>
+                        @if (Model.Estado == "Activo")
+                        {
+                            <span class="badge bg-success fs-6">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger fs-6">@Model.Estado</span>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer d-flex justify-content-between">
+            <button onclick="history.back()" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </button>
+        </div>
+
+    </div>
+
+</div>

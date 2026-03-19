@@ -1,0 +1,17 @@
+﻿@model AParCarWeb.Models.Espacio
+
+@{
+    ViewData["Title"] = "Eliminar Espacio";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    ¿Está seguro de que desea eliminar el espacio <strong>@Model.Codigo</strong> en la zona <strong>@Model.Zona?.Nombre</strong>?
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="EspacioId" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+</form>

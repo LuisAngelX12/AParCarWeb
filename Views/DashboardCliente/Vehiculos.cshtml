@@ -1,0 +1,36 @@
+﻿@model AParCarWeb.Models.Cliente
+@{
+    ViewData["Title"] = "Mis Vehículos";
+}
+
+<div style="height:30px;"></div>
+
+<h2>Mis Vehículos</h2>
+
+<a asp-action="CrearVehiculo" class="btn btn-success mb-3">
+    <i class="bi bi-plus-circle"></i> Agregar vehículo
+</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Color</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cv in Model.ClienteVehiculos!)
+        {
+            <tr>
+                <td>@cv.Vehiculo!.Placa</td>
+                <td>@cv.Vehiculo.Marca</td>
+                <td>@cv.Vehiculo.Modelo</td>
+                <td>@cv.Vehiculo.Color</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

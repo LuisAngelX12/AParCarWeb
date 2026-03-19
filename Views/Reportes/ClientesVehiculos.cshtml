@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AParCarWeb.Models.ClienteVehiculo>
+
+@{
+    ViewData["Title"] = "Clientes con Vehículos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Vehículo</th>
+            <th>Placa</th>
+            <th>Fecha Inicio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Cliente!.Nombre</td>
+                <td>@item.Vehiculo!.Marca @item.Vehiculo.Modelo</td>
+                <td>@item.Vehiculo.Placa</td>
+                <td>@item.FechaInicio.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

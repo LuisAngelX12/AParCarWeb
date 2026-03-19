@@ -1,0 +1,84 @@
+﻿@model AParCarWeb.Models.Espacio
+
+@{
+    ViewData["Title"] = "Editar Espacio";
+}
+
+<div style="height:30px;"></div>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <form asp-action="Edit" method="post" class="card shadow-lg p-4 rounded-4">
+
+        <input type="hidden" asp-for="EspacioId" />
+
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <!-- CODIGO -->
+        <div class="mb-3">
+
+            <label asp-for="Codigo" class="form-label fw-semibold">
+                Código del espacio
+            </label>
+
+            <input asp-for="Codigo"
+                   class="form-control"
+                   placeholder="Ej: A12, B05, C21" />
+
+            <small class="text-muted">
+                Identificador visible del espacio en el parqueo
+            </small>
+
+            <span asp-validation-for="Codigo" class="text-danger"></span>
+
+        </div>
+
+
+        <!-- ZONA -->
+        <div class="mb-4">
+
+            <label asp-for="ZonaId" class="form-label fw-semibold">
+                Zona del parqueo
+            </label>
+
+            <select asp-for="ZonaId"
+                    class="form-select"
+                    asp-items="ViewBag.ZonaId">
+
+                <option value="">-- Seleccione una zona --</option>
+
+            </select>
+
+            <small class="text-muted">
+                Área o sección donde se encuentra el espacio
+            </small>
+
+            <span asp-validation-for="ZonaId" class="text-danger"></span>
+
+        </div>
+
+
+        <!-- BOTONES -->
+        <div class="d-flex justify-content-between mt-4">
+
+            <a href="@Url.Action("Index")"
+               class="btn btn-outline-secondary px-4">
+                Cancelar
+            </a>
+
+            <button type="submit"
+                    class="btn btn-primary px-4">
+                Actualizar espacio
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

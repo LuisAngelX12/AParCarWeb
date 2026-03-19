@@ -1,0 +1,11 @@
+﻿@using AParCarWeb.Models.ViewModels.Vmod2
+@model VehiculoVM
+
+<div class="form-group">
+    <label>Clientes Asociados</label>
+    <select asp-for="ClientesSeleccionados"
+            class="form-control"
+            multiple
+            asp-items="@(new SelectList(ViewBag.Clientes, "ClienteId", "Nombre"))">
+    </select>
+</div>

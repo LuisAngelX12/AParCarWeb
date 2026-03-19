@@ -1,0 +1,75 @@
+﻿@using AParCarWeb.Models.ViewModels.Vmod1
+@model UsuarioCreateVM
+
+<div style="height:100px;"></div>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-start border-primary border-4">
+                <div class="card-body">
+
+                    <h2 class="card-title mb-4 text-center">
+                        <i class="bi bi-person-plus-fill"></i>
+                        Crear Usuario
+                    </h2>
+
+                    <form asp-action="Create" method="post">
+
+                        <!-- Nombre -->
+                        <div class="mb-3">
+                            <label asp-for="Nombre" class="form-label">Nombre</label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre completo" autocomplete="off" />
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="usuario@ejemplo.com" autocomplete="off"  />
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="mb-3 position-relative">
+                            <label asp-for="Password" class="form-label">Contraseña</label>
+                            <input asp-for="Password" class="form-control" type="password" autocomplete="new-password" />
+                        </div>
+
+                        <!-- Rol -->
+                        <div class="mb-4">
+                            <label asp-for="Rol" class="form-label">Rol</label>
+                            <select asp-for="Rol"
+                                    class="form-select"
+                                    asp-items="@(new SelectList(ViewBag.Roles, "Name", "Name"))">
+                                <option value="">Seleccione un rol</option>
+                            </select>
+                        </div>
+
+                        <!-- Botón Guardar -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-save"></i> Guardar
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function togglePassword(btn) {
+        const input = btn.closest('.position-relative').querySelector('input');
+        if(input.type === 'password') {
+            input.type = 'text';
+            btn.innerHTML = '<i class="bi bi-eye-slash"></i>';
+        } else {
+            input.type = 'password';
+            btn.innerHTML = '<i class="bi bi-eye"></i>';
+        }
+    }
+</script>

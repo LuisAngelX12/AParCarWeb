@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Confirmar Reserva";
+    var vehiculo = ViewBag.Vehiculo;
+    var espacio = ViewBag.Espacio;
+}
+
+<div style="height:150px;"></div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+
+            <div class="card identity-card shadow-sm">
+                <div class="card-body">
+
+                    <h2 class="mb-3">Confirmar reserva</h2>
+                    <p class="text-muted mb-4">
+                        Revisa la información antes de confirmar tu reserva.
+                    </p>
+
+                    <hr />
+
+                    <!-- VEHÍCULO -->
+                    <h5 class="mt-3">Vehículo</h5>
+                    <div class="mb-2">
+                        <strong>Placa:</strong> @vehiculo.Placa
+                    </div>
+                    <div class="mb-2">
+                        <strong>Marca:</strong> @vehiculo.Marca
+                    </div>
+                    <div class="mb-3">
+                        <strong>Modelo:</strong> @vehiculo.Modelo
+                    </div>
+
+                    <hr />
+
+                    <!-- ESPACIO -->
+                    <h5 class="mt-3">Espacio</h5>
+                    <div class="mb-2">
+                        <strong>Código:</strong> @espacio.Codigo
+                    </div>
+                    <div class="mb-3">
+                        <strong>Zona:</strong> @espacio.Zona.Nombre
+                    </div>
+
+                    <hr />
+
+                    <!-- ACCIONES -->
+                    <form asp-action="ConfirmarReservaPost" method="post" class="mt-4" 
+                          onsubmit="return confirm('¿Seguro que quieres confirmar esta reserva?');">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="vehiculoId" value="@vehiculo.VehiculoId" />
+                        <input type="hidden" name="espacioId" value="@espacio.EspacioId" />
+
+                        <div class="d-flex justify-content-between gap-2">
+                            <a asp-action="Espacios" class="btn btn-outline-dark w-50">
+                                Cancelar
+                            </a>
+
+                            <button type="submit" class="btn btn-dark w-50">
+                                Confirmar
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

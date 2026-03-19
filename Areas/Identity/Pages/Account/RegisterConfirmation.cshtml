@@ -1,0 +1,58 @@
+﻿@page
+@model RegisterConfirmationModel
+
+@{
+    ViewData["Title"] = "Confirmar registro";
+}
+
+<body class="identity-bg identity-animate">
+
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
+
+                <div class="card identity-card border-0 overflow-hidden">
+                    <div class="row g-0">
+
+                        <!-- BRAND -->
+                        <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center identity-brand">
+                            <div class="p-5 text-center text-white">
+                                <h2 class="fw-bold mb-3">AParCar Web</h2>
+                                <p class="opacity-75">
+                                    Confirmación de cuenta
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- CONTENT -->
+                        <div class="col-md-6 p-5 text-center">
+                            <h3 class="fw-bold mb-3">Cuenta creada 
+                                <i class="bi bi-person-check-fill"></i>
+                                </h3>
+
+                            <p class="text-muted mb-4">
+                                Hemos enviado un correo de confirmación a tu dirección
+                                de email.
+                                <br />
+                                Por favor revisa tu bandeja de entrada
+                                (y la carpeta de spam).
+                            </p>
+
+                            <div class="alert alert-light border small mb-4">
+                                ⚠️ El enlace de confirmación tiene una validez limitada.
+                            </div>
+
+                            <a asp-page="./Login"
+                               class="btn btn-dark px-4 fw-semibold">
+                                Volver a iniciar sesión
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>

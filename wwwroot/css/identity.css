@@ -1,0 +1,307 @@
+﻿/* =========================================================
+   IDENTITY – LAYOUT
+   ========================================================= */
+
+html {
+    overflow-y: scroll;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+}
+
+/* Contenedor principal */
+.identity-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+/* =========================================================
+   IDENTITY BACKGROUND (MODE SAFE)
+   ========================================================= */
+
+/* Light mode */
+html:not(.dark-mode) body.identity-bg {
+    background-color: #f5f7fa;
+    background-image: none;
+}
+
+/* Dark mode */
+html.dark-mode body.identity-bg {
+    background-color: #121212;
+    background-image: none;
+}
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.identity-card,
+.card {
+    border-radius: clamp(12px, 2vw, 20px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    animation: fadeIn 0.4s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+
+    .identity-card .p-5 {
+        padding: clamp(1.5rem, 3vw, 3rem) !important;
+    }
+
+    .identity-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
+    }
+
+/* =========================================================
+   BRAND / BADGES
+   ========================================================= */
+
+.identity-brand {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient( 135deg, rgba(17, 24, 39, 0.85), rgba(31, 41, 55, 0.9) ), url('/img/Logo-bg-Dark.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.identity-badges .badge {
+    padding: 0.4rem 0.75rem;
+    font-weight: 500;
+}
+
+html:not(.dark-mode) .identity-brand {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient( 135deg, rgba(194, 65, 12, 0.85), rgba(251, 146, 60, 0.9) ), url('/img/Logo-bg-Light.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    z-index: 5;
+}
+
+    .password-toggle:hover {
+        color: #e5e7eb;
+    }
+
+.form-floating > .form-control {
+    padding-right: 3rem;
+}
+
+/* =========================================================
+   PASSWORD STRENGTH
+   ========================================================= */
+
+.password-strength .progress {
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.password-strength .progress-bar {
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.identity-link {
+    position: relative;
+}
+
+    .identity-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transition: transform 0.25s ease;
+    }
+
+    .identity-link:hover::after {
+        transform: scaleX(1);
+    }
+
+/* =========================================================
+   PAGE ANIMATIONS
+   ========================================================= */
+
+.identity-animate {
+    animation: slideIn 0.45s cubic-bezier(.4, 0, .2, 1);
+}
+
+.identity-leave {
+    animation: pageLeave 0.25s ease-in forwards;
+}
+
+.identity-leave-left {
+    animation: slideOutLeft 0.35s cubic-bezier(.4, 0, .2, 1) forwards;
+}
+
+.identity-leave-right {
+    animation: slideOutRight 0.35s cubic-bezier(.4, 0, .2, 1) forwards;
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html.dark-mode,
+html.dark-mode body {
+    color: #e5e7eb;
+}
+
+    /* Navegación y paneles */
+    html.dark-mode nav,
+    html.dark-mode aside,
+    html.dark-mode .sidebar,
+    html.dark-mode .left-menu {
+        background-color: #111827;
+        color: #e5e7eb;
+    }
+
+        html.dark-mode nav a,
+        html.dark-mode aside a,
+        html.dark-mode .sidebar a,
+        html.dark-mode .left-menu a {
+            color: #9ca3af;
+        }
+
+            html.dark-mode nav a.active,
+            html.dark-mode aside a.active,
+            html.dark-mode .sidebar a.active,
+            html.dark-mode .left-menu a.active {
+                color: #3b82f6;
+            }
+
+    /* Cards */
+    html.dark-mode .card.identity-card {
+        background-color: #111827;
+        color: #e5e7eb;
+        border: 1px solid #1f2937;
+    }
+
+    /* Inputs */
+    html.dark-mode .form-control {
+        background-color: #1e293b;
+        color: #e5e7eb;
+        border-color: #334155;
+    }
+
+        html.dark-mode .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+    /* Autofill */
+    html.dark-mode input:-webkit-autofill,
+    html.dark-mode textarea:-webkit-autofill,
+    html.dark-mode select:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px #1e293b inset !important;
+        -webkit-text-fill-color: #e5e7eb !important;
+        caret-color: #e5e7eb;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+        html.dark-mode input:-webkit-autofill ~ label,
+        html.dark-mode textarea:-webkit-autofill ~ label {
+            color: #0d6efd;
+        }
+
+/* Light mode autofill */
+html:not(.dark-mode) input:-webkit-autofill,
+html:not(.dark-mode) textarea:-webkit-autofill,
+html:not(.dark-mode) select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #f5f7fa inset !important; /* coincide con fondo light */
+    -webkit-text-fill-color: #111827 !important; /* texto oscuro */
+    caret-color: #111827;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+    html:not(.dark-mode) input:-webkit-autofill ~ label,
+    html:not(.dark-mode) textarea:-webkit-autofill ~ label {
+        color: #6b7280; /* placeholder/label color para light mode */
+    }
+
+
+/* =========================================================
+   TRANSITIONS
+   ========================================================= */
+
+body,
+.card,
+.form-control,
+.btn,
+.footer {
+    transition: color 0.3s ease;
+}
+
+html.transition-enabled,
+html.transition-enabled .card,
+html.transition-enabled .form-control,
+html.transition-enabled .btn,
+html.transition-enabled .footer {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* Animación de entrada */
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-wrapper.identity-animate {
+    animation: fadeInPage 0.4s ease-out forwards;
+}
+
+/* Animación de salida (opcional para SPA o navegación con JS) */
+@keyframes fadeOutPage {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.page-wrapper.identity-leave {
+    animation: fadeOutPage 0.25s ease-in forwards;
+}

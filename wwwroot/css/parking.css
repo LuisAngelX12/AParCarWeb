@@ -1,0 +1,170 @@
+﻿.parking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.parking-spot {
+    height: 60px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.parking-spot:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Estados */
+.parking-spot.disponible {
+    background-color: #28a745;
+}
+
+.parking-spot.reservado {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.parking-spot.ocupado {
+    background-color: #dc3545;
+}
+
+.parking-spot.fueraservicio {
+    background-color: #6c757d;
+}
+
+.card.border-success {
+    border-width: 2px;
+}
+
+.card.border-warning {
+    border-width: 2px;
+}
+
+.card.border-danger {
+    border-width: 2px;
+}
+
+.card-img-top {
+    height: 150px;
+    object-fit: cover;
+}
+
+/* =========================
+   DARK MODE – CARDS GENERALES
+   ========================= */
+
+html.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    border-color: #333;
+}
+
+    /* Texto dentro del card */
+    html.dark-mode .card .card-title,
+    html.dark-mode .card .card-text,
+    html.dark-mode .card p,
+    html.dark-mode .card span,
+    html.dark-mode .card small {
+        color: #f1f1f1;
+    }
+
+/* Card header / footer (por si los usas luego) */
+html.dark-mode .card-header,
+html.dark-mode .card-footer {
+    background-color: #1a1a1a;
+    border-color: #333;
+}
+
+/* Badges dentro de cards */
+html.dark-mode .card .badge {
+    color: #fff;
+}
+
+/* Ícono placeholder del mapa */
+html.dark-mode .card .bi {
+    color: #bbb;
+}
+
+/* =========================
+   DARK MODE – TABLAS
+   ========================= */
+
+html.dark-mode .table {
+    color: #f1f1f1;
+    background-color: #1e1e1e;
+}
+
+    /* Cabecera */
+    html.dark-mode .table thead th {
+        background-color: #1a1a1a;
+        color: #f1f1f1;
+        border-color: #333;
+    }
+
+    /* Celdas */
+    html.dark-mode .table td,
+    html.dark-mode .table th {
+        background-color: #1e1e1e;
+        color: #f1f1f1;
+        border-color: #333;
+    }
+
+    /* Filas */
+    html.dark-mode .table tbody tr {
+        background-color: #1e1e1e;
+    }
+
+        /* Hover */
+        html.dark-mode .table tbody tr:hover {
+            background-color: #2a2a2a;
+        }
+
+/* Inputs y selects en modo oscuro */
+html.dark-mode .form-control,
+html.dark-mode .form-select {
+    background-color: #2a2a2a !important; /* gris oscuro */
+    color: #f1f1f1 !important; /* texto claro */
+    border-color: #444 !important; /* borde sutil */
+}
+
+/* =========================
+   MODO CLARO – BORDES MÁS DEFINIDOS
+   ========================= */
+
+/* Cards */
+html:not(.dark-mode) .card {
+    border: 1px solid #b5b5b5;
+}
+
+/* Tablas */
+html:not(.dark-mode) .table {
+    border-color: #b5b5b5;
+}
+
+    html:not(.dark-mode) .table th,
+    html:not(.dark-mode) .table td {
+        border-color: #b5b5b5;
+    }
+
+/* Inputs */
+html:not(.dark-mode) .form-control {
+    border-color: #b5b5b5;
+}
+
+
+html.dark-mode .form-control:focus,
+html.dark-mode .form-select:focus {
+    background-color: #2a2a2a !important;
+    color: #f1f1f1 !important;
+    border-color: #007bff !important; /* azul de Bootstrap */
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+

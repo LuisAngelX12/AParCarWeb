@@ -1,0 +1,137 @@
+﻿@model AParCarWeb.Models.Espacio
+
+@{
+    ViewData["Title"] = "Detalle del Espacio";
+}
+
+<div style="height:100px;"></div>
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="bi bi-grid"></i> Detalle del Espacio
+            </h4>
+
+            <span class="badge bg-light text-dark">
+                ID: @Model.EspacioId
+            </span>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Código</label>
+                    <div class="fs-5 fw-bold">
+                        @Model.Codigo
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Zona</label>
+                    <div class="fs-5">
+                        @Model.Zona?.Nombre
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="text-muted fw-semibold">Estado</label>
+                    <div>
+
+                        @if (Model.Ocupado)
+                        {
+                            <span class="badge bg-danger fs-6">
+                                Ocupado
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success fs-6">
+                                Disponible
+                            </span>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="my-4" />
+
+            <h5 class="mb-3">
+                <i class="bi bi-car-front"></i> Vehículo en el espacio
+            </h5>
+
+            @if (ViewBag.Vehiculo != null)
+            {
+                var v = ViewBag.Vehiculo;
+
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+                        <label class="text-muted">Placa</label>
+                        <div class="fw-bold fs-5">
+                            @v.Placa
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="text-muted">Marca</label>
+                        <div>
+                            @v.Marca
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="text-muted">Modelo</label>
+                        <div>
+                            @v.Modelo
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="text-muted">Color</label>
+                        <div>
+                            @v.Color
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="text-muted">Fecha de entrada</label>
+                        <div>
+                            @ViewBag.FechaEntrada.ToString("dd/MM/yyyy HH:mm")
+                        </div>
+                    </div>
+
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-success">
+                    <i class="bi bi-check-circle"></i>
+                    Este espacio está libre actualmente.
+                </div>
+            }
+
+        </div>
+
+        <div class="card-footer d-flex justify-content-between">
+
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+
+            <a href="@Url.Action("Edit", new { id = Model.EspacioId })"
+               class="btn btn-primary">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

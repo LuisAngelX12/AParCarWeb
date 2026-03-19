@@ -1,0 +1,282 @@
+﻿@model AParCarWeb.Models.Cliente
+
+@{
+    ViewData["Title"] = "Mi Dashboard";
+}
+
+<!-- Título -->
+<div class="container mt-5">
+    <h2 class="mb-4">Bienvenido, @(Model?.Nombre ?? "Cliente")</h2>
+
+    <!-- Aquí van las tarjetas, botones, etc. -->
+    <!-- Tarjetas de resumen -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card text-bg-primary shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-car-front-fill fs-2 me-3"></i>
+                    <div>
+                        <h5 class="card-title">Vehículos</h5>
+                        <h2 class="card-text">@ViewBag.TotalVehiculos</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-bg-success shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-ticket-fill fs-2 me-3"></i>
+                    <div>
+                        <h5 class="card-title">Tickets Activos</h5>
+                        <h2 class="card-text">@ViewBag.TicketsActivos</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-bg-warning shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-clock-fill fs-2 me-3"></i>
+                    <div>
+                        <h5 class="card-title">Visitas Totales</h5>
+                        <h2 class="card-text">@ViewBag.TotalVisitas</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-bg-dark shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-cash-stack fs-2 me-3"></i>
+                    <div>
+                        <h5 class="card-title">Total Pagado</h5>
+                        <h2 class="card-text">₡ @ViewBag.TotalPagado</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Botones de acción -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <a asp-action="Espacios" class="btn btn-outline-warning w-100 py-3 fs-5">
+                <i class="bi bi-p-square-fill me-2"></i> Reservar parqueo
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-action="Vehiculos" class="btn btn-outline-primary w-100 py-3 fs-5">
+                <i class="bi bi-car-front-fill me-2"></i> Mis Vehículos
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-action="Historial" class="btn btn-outline-secondary w-100 py-3 fs-5">
+                <i class="bi bi-journal-text me-2"></i> Historial de Parqueos
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-action="Pagos" class="btn btn-outline-success w-100 py-3 fs-5">
+                <i class="bi bi-credit-card-2-front me-2"></i> Mis Pagos
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Modal para completar datos -->
+@if (
+    string.IsNullOrEmpty(Model?.Nombre) ||
+    string.IsNullOrEmpty(Model?.Identificacion) ||
+    string.IsNullOrEmpty(Model?.Telefono)
+)
+{
+    <div class="modal fade show" id="datosModal" style="display:block;" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow bg-dark text-light">
+                <form method="post"
+                      asp-action="SetDatosCliente"
+                      asp-controller="DashboardCliente">
+
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">Completa tus datos</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="UsuarioId" value="@Model?.UsuarioId" />
+
+                        <!-- NOMBRE -->
+                        <div class="mb-3">
+                            <label class="form-label">Nombre completo</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="Nombre"
+                                   value="@Model?.Nombre"
+                                   pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]+"
+                                   title="Solo letras y espacios"
+                                   required />
+                        </div>
+
+                        <!-- IDENTIFICACIÓN -->
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de cédula</label>
+                            <select class="form-select" id="tipoCedula" onchange="updateCedulaMask()">
+                                <option value="nacional" selected>Cédula Nacional</option>
+                                <option value="dimex">DIMEX / Extranjero</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Identificación</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="identificacionInput"
+                                   name="Identificacion"
+                                   placeholder="1-2345-6789"
+                                   inputmode="numeric"
+                                   required
+                                   oninput="formatCedula(this)" />
+                        </div>
+
+                        <!-- TELÉFONO -->
+                        <div class="mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text"
+                                   id="telefonoVisual"
+                                   class="form-control"
+                                   placeholder="8888-8888"
+                                   inputmode="numeric"
+                                   required
+                                   oninput="formatTelefono(this)" />
+                            <input type="hidden" name="Telefono" id="telefonoHidden" />
+                        </div>
+                    </div>
+
+                    <div class="modal-footer d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tipoCedula = 'nacional';
+
+        function updateCedulaMask() {
+            tipoCedula = document.getElementById('tipoCedula').value;
+            const input = document.getElementById('identificacionInput');
+            input.value = '';
+            input.placeholder = tipoCedula === 'nacional' ? '1-2345-6789' : '12345678901';
+        }
+
+        function formatCedula(input) {
+            let value = input.value.replace(/\D/g, '');
+
+            if (tipoCedula === 'nacional') {
+                value = value.substring(0, 9);
+                if (value.length > 1)
+                    value = value.substring(0, 1) + '-' + value.substring(1);
+                if (value.length > 6)
+                    value = value.substring(0, 6) + '-' + value.substring(6);
+            } else {
+                value = value.substring(0, 12);
+            }
+
+            input.value = value;
+        }
+
+        function formatTelefono(input) {
+            let v = input.value.replace(/\D/g, '').substring(0, 8);
+            input.value = v.length > 4 ? v.substring(0, 4) + '-' + v.substring(4) : v;
+            document.getElementById('telefonoHidden').value = v;
+        }
+
+        function cerrarModal() {
+            const modalEl = document.getElementById('datosModal');
+            modalEl.classList.remove('show');
+            modalEl.style.display = 'none';
+        }
+
+        new bootstrap.Modal(
+            document.getElementById('datosModal'),
+            { backdrop: 'static', keyboard: false }
+        ).show();
+    </script>
+}
+
+<hr />
+
+<h4 class="mb-3">
+    <i class="bi bi-exclamation-circle text-danger"></i>
+    Pagos Pendientes
+</h4>
+
+@if (ViewBag.PagosPendientes != null && ViewBag.PagosPendientes.Count > 0)
+{
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Ticket</th>
+                <th>Vehículo</th>
+                <th>Fecha Entrada</th>
+                <th>Estado</th>
+                <th>Pagar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var t in ViewBag.PagosPendientes)
+            {
+                <tr>
+                    <td>#@t.TicketId</td>
+
+                    <td>
+                        @(t.Vehiculo?.Placa ?? "N/A")
+                    </td>
+
+                    <td>
+                        @t.FechaEntrada.ToLocalTime().ToString("g")
+                    </td>
+
+                    <td>
+                        <span class="badge bg-warning text-dark">
+                            <i class="bi bi-clock"></i> Pendiente
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <form asp-controller="Pagos"
+                              asp-action="PagarPaypal"
+                              method="post"
+                              class="d-inline">
+
+                            <input type="hidden"
+                                   name="ticketId"
+                                   value="@t.TicketId" />
+
+                            <button type="submit"
+                                    class="btn btn-sm btn-primary">
+
+                                <i class="bi bi-paypal"></i>
+                                Pagar
+                            </button>
+
+                        </form>
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-success">
+        <i class="bi bi-check-circle"></i>
+        No tienes pagos pendientes
+    </div>
+}

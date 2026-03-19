@@ -1,0 +1,32 @@
+﻿@using AParCarWeb.Templates.Email.ViewModels
+@model WelcomeUserViewModel
+
+<div style="font-family: Arial; background:#f4f6f8; padding:20px;">
+    <div style="max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:10px;">
+
+        <div style="text-align:center;">
+            <img src="cid:logo_aparcar" style="width:120px;" />
+            <h2 style="color:#198754;">Bienvenido a AParCar</h2>
+        </div>
+
+        <div style="text-align:center; margin:20px 0;">
+            <!-- Icono -->
+            <svg width="60" height="60" fill="#198754" viewBox="0 0 16 16">
+                <path d="M8 0a5 5 0 0 0-5 5v3H2a1 1 0 0 0-1 1v6h14V9a1 1 0 0 0-1-1h-1V5a5 5 0 0 0-5-5z"/>
+            </svg>
+        </div>
+
+        <p>Hola <strong>@Model.UserName</strong>,</p>
+
+        <p>
+            Tu cuenta ha sido creada exitosamente. Ahora puedes gestionar parqueos de forma inteligente
+        </p>
+
+        <hr />
+
+        <small style="color:#777;">
+            AParCar – Sistema de parqueo inteligente<br />
+            San José, Costa Rica
+        </small>
+    </div>
+</div>

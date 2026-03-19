@@ -1,0 +1,140 @@
+﻿@model AParCarWeb.Models.Ticket
+
+@{
+    ViewData["Title"] = "Nuevo Ticket";
+}
+
+<div style="height:30px;"></div>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <form asp-action="Create" method="post" class="card shadow-lg p-4 rounded-4">
+
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <!-- VEHICULO -->
+        <div class="mb-3">
+
+            <label asp-for="VehiculoId" class="form-label fw-semibold">
+                Vehículo (Placa)
+            </label>
+
+            <select asp-for="VehiculoId"
+                    class="form-select buscador"
+                    asp-items="@(ViewData["VehiculoId"] as SelectList)">
+                <option value="">-- Buscar o seleccionar vehículo --</option>
+            </select>
+
+            <small class="text-muted">
+                Puede escribir la placa para encontrarlo rápidamente
+            </small>
+
+            <span asp-validation-for="VehiculoId" class="text-danger"></span>
+
+        </div>
+
+        <!-- ESPACIO -->
+        <div class="mb-3">
+
+            <label asp-for="EspacioId" class="form-label fw-semibold">
+                Espacio disponible
+            </label>
+
+            <select asp-for="EspacioId"
+                    class="form-select buscador"
+                    asp-items="@(ViewData["EspacioId"] as SelectList)">
+                <option value="">-- Buscar o seleccionar espacio --</option>
+            </select>
+
+            <small class="text-muted">
+                Filtre por código del espacio (Ej: A12, B05)
+            </small>
+
+            <span asp-validation-for="EspacioId" class="text-danger"></span>
+
+        </div>
+
+        <!-- FECHA ENTRADA -->
+        <div class="mb-3">
+
+            <label asp-for="FechaEntrada" class="form-label fw-semibold">
+                Fecha de entrada
+            </label>
+
+            <input asp-for="FechaEntrada"
+                   type="datetime-local"
+                   class="form-control" />
+
+            <span asp-validation-for="FechaEntrada" class="text-danger"></span>
+
+        </div>
+
+        <!-- FECHA SALIDA -->
+        <div class="mb-3">
+
+            <label asp-for="FechaSalida" class="form-label fw-semibold">
+                Fecha de salida (opcional)
+            </label>
+
+            <input asp-for="FechaSalida"
+                   type="datetime-local"
+                   class="form-control" />
+
+            <span asp-validation-for="FechaSalida" class="text-danger"></span>
+
+        </div>
+
+        <!-- ESTADO -->
+        <div class="mb-3">
+
+            <label asp-for="Estado" class="form-label fw-semibold">
+                Estado del ticket
+            </label>
+
+            <input asp-for="Estado"
+                   class="form-control"
+                   placeholder="Ej: Activo, Finalizado" />
+
+            <span asp-validation-for="Estado" class="text-danger"></span>
+
+        </div>
+
+        <!-- BOTONES -->
+        <div class="d-flex justify-content-between mt-4">
+
+            <a href="javascript:history.back()"
+                   class="btn btn-outline-secondary px-4">
+                Cancelar
+            </a>
+
+            <button type="submit"
+                    class="btn btn-success px-4">
+                Guardar ticket
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <!-- SELECT2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+        $('.buscador').select2({
+        placeholder: "Escriba para buscar...",
+        allowClear: true,
+        width: '100%'
+        });
+        });
+    </script>
+}

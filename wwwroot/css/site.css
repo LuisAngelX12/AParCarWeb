@@ -1,0 +1,403 @@
+/* =========================================================
+   BASE GLOBAL
+   ========================================================= */
+
+.navbar-logo {
+    height: 42px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    overflow-y: scroll;
+    font-size: clamp(14px, 1.1vw, 16px);
+}
+
+body {
+    min-height: 100vh;
+    margin-bottom: 60px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ajuste desktop */
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+    color: #6c757d;
+}
+
+    .password-toggle:hover {
+        color: #212529;
+    }
+
+/* Barra de fuerza */
+.password-strength .progress-bar {
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* =========================================================
+   BOOTSTRAP OVERRIDES
+   ========================================================= */
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem #fff, 0 0 0 0.25rem #258cfb;
+}
+
+/* =========================================================
+   TRANSICIONES GENERALES
+   ========================================================= */
+
+.container {
+    transition: padding 0.3s ease;
+}
+
+.btn {
+    padding: clamp(0.6rem, 1.5vw, 0.75rem) clamp(1rem, 2vw, 1.25rem);
+    transition: all 0.25s ease;
+}
+
+.form-control {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Transiciones visuales globales */
+body,
+.card,
+.form-control,
+.btn,
+.footer {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* =========================================================
+   TEXTOS GENERALES
+   ========================================================= */
+
+h1,
+h2,
+h3 {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+}
+
+.text-muted {
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html.dark-mode,
+html.dark-mode body {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+    /* Navegación y paneles */
+    html.dark-mode nav,
+    html.dark-mode aside,
+    html.dark-mode .sidebar,
+    html.dark-mode .left-menu {
+        background-color: #1e1e1e;
+        color: #f1f1f1;
+    }
+
+        html.dark-mode nav a,
+        html.dark-mode aside a,
+        html.dark-mode .sidebar a,
+        html.dark-mode .left-menu a {
+            color: #ccc;
+        }
+
+            html.dark-mode nav a.active,
+            html.dark-mode aside a.active,
+            html.dark-mode .sidebar a.active,
+            html.dark-mode .left-menu a.active {
+                color: #0d6efd;
+            }
+
+    /* Cards */
+    html.dark-mode .card.identity-card {
+        background-color: #1e1e1e;
+        color: #f1f1f1;
+        border: 1px solid #333;
+    }
+
+    /* Brand */
+    html.dark-mode .identity-brand {
+        background-color: #0b0b0b;
+        color: #f1f1f1;
+    }
+
+    /* Inputs */
+    html.dark-mode .form-control {
+        background-color: #2a2a2a;
+        color: #f1f1f1;
+        border-color: #444;
+    }
+
+        html.dark-mode .form-control::placeholder {
+            color: #bbb;
+        }
+
+    html.dark-mode .form-floating > label {
+        color: #ccc;
+    }
+
+    html.dark-mode .form-floating > .form-control:focus ~ label {
+        color: #0d6efd;
+    }
+
+    /* Textos secundarios */
+    html.dark-mode .text-muted {
+        color: #aaa !important;
+    }
+
+    /* Alertas */
+    html.dark-mode .alert {
+        background-color: #2a2a2a;
+        color: #eee;
+        border-color: #444;
+    }
+
+    /* Footer */
+    html.dark-mode .footer {
+        background-color: #1a1a1a;
+        color: #ccc;
+        border-top-color: #333;
+    }
+
+    /* Botones */
+    html.dark-mode .btn-dark {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        color: #fff;
+    }
+
+    html.dark-mode .btn-outline-dark {
+        border-color: #fff;
+        color: #fff;
+    }
+
+
+    html.dark-mode .table {
+        color: #f1f1f1;
+    }
+
+        html.dark-mode .table thead {
+            background-color: #1e1e1e;
+        }
+
+    html.dark-mode .table-hover tbody tr:hover {
+        background-color: #2a2a2a;
+    }
+
+/* =========================================================
+READONLY DARK MODE
+========================================================= */
+
+html.dark-mode input[readonly],
+html.dark-mode .form-control[readonly] {
+    background-color: #1a1a1a !important;
+    color: #888;
+    border: 1px dashed #555;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   TRANSICIONES (SOLO CUANDO TOGGLE)
+   ========================================================= */
+
+html.transition-enabled,
+html.transition-enabled .card,
+html.transition-enabled .form-control,
+html.transition-enabled .btn,
+html.transition-enabled .footer {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Alertas */
+
+.fade-alert {
+    position: fixed;
+    top: 70px; /* debajo del navbar si tienes */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 400px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.message.fade-alert {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    width: 350px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+    .fade-alert.show {
+        opacity: 1;
+    }
+
+
+/* =========================================================
+   SELECT2 GLOBAL FIX
+   ========================================================= */
+
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 38px !important;
+    padding: 0.375rem 0.75rem;
+    display: flex;
+    align-items: center;
+    border-radius: 0.375rem;
+}
+
+.select2-container--default .select2-selection__rendered {
+    line-height: normal !important;
+    padding-left: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+.select2-container--default .select2-selection__arrow {
+    height: 100% !important;
+    right: 10px;
+}
+
+.select2-dropdown {
+    border-radius: 0.375rem;
+}
+
+.select2-search__field {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SELECT2 LIGHT MODE
+   ========================================================= */
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    color: #212529;
+}
+
+.select2-container--default .select2-selection__placeholder {
+    color: #6c757d;
+}
+
+.select2-dropdown {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+}
+
+.select2-results__option {
+    background-color: #fff;
+    color: #212529;
+}
+
+.select2-results__option--highlighted {
+    background-color: #0d6efd !important;
+    color: #fff;
+}
+
+.select2-search__field {
+    background-color: #fff;
+    color: #212529;
+    border: 1px solid #ced4da;
+}
+
+/* Focus estilo Bootstrap */
+.select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+}
+
+
+/* =========================================================
+   SELECT2 DARK MODE
+   ========================================================= */
+
+html.dark-mode .select2-container--default .select2-selection--single {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #f1f1f1;
+    height: 38px !important;
+}
+
+html.dark-mode .select2-container--default .select2-selection__rendered {
+    color: #f1f1f1;
+}
+
+html.dark-mode .select2-container--default .select2-selection__placeholder {
+    color: #bbb;
+}
+
+html.dark-mode .select2-container--default .select2-selection__arrow b {
+    border-color: #ccc transparent transparent transparent;
+}
+
+/* Dropdown */
+html.dark-mode .select2-dropdown {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+}
+
+/* Opciones */
+html.dark-mode .select2-results__option {
+    background-color: #2a2a2a;
+    color: #f1f1f1;
+}
+
+/* Hover */
+html.dark-mode .select2-results__option--highlighted {
+    background-color: #0d6efd !important;
+    color: #fff;
+}
+
+/* Input búsqueda */
+html.dark-mode .select2-search__field {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    border: 1px solid #444;
+}
+
+/* Focus */
+html.dark-mode .select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+}

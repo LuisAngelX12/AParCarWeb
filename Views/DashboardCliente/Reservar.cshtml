@@ -1,0 +1,87 @@
+﻿@model IEnumerable<AParCarWeb.Models.ClienteVehiculo>
+
+@{
+    ViewData["Title"] = "Seleccionar Vehículo";
+
+    // Imagen por defecto
+    var rutaImagenDefault = Url.Content("~/img/Vehiculo/Vehiculo-default.jpg");
+}
+
+<div style="height:30px;"></div>
+
+
+<div class="content-offset">
+
+    <div class="d-flex align-items-center mb-3">
+        <button type="button"
+                class="btn btn-outline-secondary"
+                onclick="history.back()">
+            <i class="bi bi-arrow-left"></i>
+            Volver
+        </button>
+    </div>
+
+    <h3 class="mb-3">
+        <i class="bi bi-car-front"></i> Seleccione su vehículo
+    </h3>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">
+            No tiene vehículos activos registrados.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var cv in Model)
+            {
+                // Normalizar la marca para la ruta del archivo
+                var marca = cv.Vehiculo!.Marca!.Replace(" ", "-").ToUpper();
+
+                // Construir la ruta usando solo la marca
+                var rutaVehiculo = Url.Content($"~/img/vehiculo/vehiculo-{marca}.jpg");
+
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="card h-100 shadow-sm">
+
+                        <img src="@rutaVehiculo"
+                             class="card-img-top"
+                             alt="Vehículo"
+                             onerror="this.onerror=null;this.src='@rutaImagenDefault';" />
+
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-car-front-fill"></i>
+                                @cv.Vehiculo.Placa
+                            </h5>
+
+                            <p class="card-text mb-1">
+                                <strong>Marca:</strong> @cv.Vehiculo.Marca
+                            </p>
+
+                            <p class="card-text mb-1">
+                                <strong>Modelo:</strong> @cv.Vehiculo.Modelo
+                            </p>
+
+                            <p class="card-text mb-1">
+                                <strong>Color:</strong> @cv.Vehiculo.Color
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-transparent border-0">
+                            <a asp-action="ConfirmarReserva"
+                               asp-route-vehiculoId="@cv.VehiculoId"
+                               asp-route-espacioId="@ViewBag.EspacioId"
+                               class="btn btn-primary w-100">
+                                <i class="bi bi-arrow-right-circle"></i>
+                                Continuar
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

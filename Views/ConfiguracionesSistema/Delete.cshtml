@@ -1,0 +1,42 @@
+﻿@model AParCarWeb.Models.ConfiguracionSistema
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div style="height:30px;"></div>
+
+<h1 class="text-danger mb-3">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>Eliminar configuración
+</h1>
+
+<div class="card border-danger shadow-sm">
+    <div class="card-body">
+        <p class="mb-3">
+            ¿Estás seguro de que deseas eliminar este registro?
+        </p>
+
+        <dl class="row">
+            <dt class="col-sm-3">Clave</dt>
+            <dd class="col-sm-9">@Model.Clave</dd>
+
+            <dt class="col-sm-3">Valor</dt>
+            <dd class="col-sm-9">@Model.Valor</dd>
+
+            <dt class="col-sm-3">Descripción</dt>
+            <dd class="col-sm-9 text-muted">@Model.Descripcion</dd>
+        </dl>
+
+        <form asp-action="Delete" class="d-flex justify-content-between">
+            <input type="hidden" asp-for="ConfiguracionId" />
+
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-danger">
+                <i class="bi bi-trash me-1"></i> Eliminar
+            </button>
+        </form>
+    </div>
+</div>

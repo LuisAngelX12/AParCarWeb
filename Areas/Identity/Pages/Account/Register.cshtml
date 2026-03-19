@@ -1,0 +1,153 @@
+﻿@page
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Crear cuenta";
+}
+
+<body class="identity-bg identity-animate">
+    <div class="page-wrapper identity-animate">
+
+        <div class="container d-flex align-items-center justify-content-center min-vh-100">
+            <div class="row w-100 justify-content-center">
+                <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
+
+                    <div class="card identity-card border-0 overflow-hidden">
+                        <div class="row g-0">
+
+                            <!-- LEFT / BRAND PANEL -->
+                            <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center identity-brand">
+                                <div class="p-5 text-center text-white">
+                                    <h2 class="fw-bold mb-3">AParCar Web</h2>
+                                    <p class="opacity-75 mb-4">
+                                        Reserva, gestiona y controla tus espacios
+                                        de parqueo desde un solo lugar.
+                                    </p>
+
+                                    <div class="identity-badges">
+                                        <span class="badge rounded-pill bg-light text-dark me-2">Seguro</span>
+                                        <span class="badge rounded-pill bg-light text-dark me-2">Rápido</span>
+                                        <span class="badge rounded-pill bg-light text-dark">Moderno</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RIGHT / FORM PANEL -->
+                            <div class="col-md-6 p-5">
+                                <h3 class="fw-bold mb-1">
+                                    Crea tu cuenta
+                                    <i class="bi bi-person-fill-add"></i>
+                                </h3>
+                                <p class="text-muted mb-4">
+                                    Regístrate para comenzar
+                                </p>
+
+                                <form method="post" asp-route-returnUrl="@Model.ReturnUrl" novalidate>
+
+                                    <div asp-validation-summary="ModelOnly"
+                                         class="alert alert-danger py-2 small"
+                                         role="alert"></div>
+
+                                    <small class="text-muted">Ej: correo@ejemplo.com</small>
+
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Input.Email"
+                                               class="form-control"
+                                               placeholder=""
+                                               autocomplete="username" />
+                                        <label asp-for="Input.Email">Correo electrónico</label>
+                                        <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="form-floating mb-3 position-relative">
+                                        <input asp-for="Input.Password"
+                                               type="password"
+                                               id="passwordInput"
+                                               class="form-control"
+                                               placeholder=" "
+                                               autocomplete="new-password" />
+
+                                        <label asp-for="Input.Password">Contraseña</label>
+
+                                        <!-- Botón ojo -->
+                                        <button type="button"
+                                                class="password-toggle"
+                                                onclick="togglePassword('passwordInput', this)"
+                                                aria-label="Mostrar contraseña">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+
+                                    
+                                    </div>
+
+                                    <div class="form-floating mb-3 position-relative">
+                                        <span asp-validation-for="Input.Password" class="text-danger small"></span>
+
+                                        <!-- Barra de fuerza -->
+                                        <div class="password-strength mt-2">
+                                            <div class="progress" style="height: 6px;">
+                                                <div id="passwordStrengthBar"
+                                                     class="progress-bar"
+                                                     role="progressbar"></div>
+                                            </div>
+                                            <small id="passwordStrengthText" class="text-muted"></small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Confirm Password -->
+                                    <div class="form-floating mb-3 position-relative">
+                                        <input asp-for="Input.ConfirmPassword"
+                                               type="password"
+                                               id="confirmPasswordInput"
+                                               class="form-control"
+                                               placeholder=" "
+                                               autocomplete="new-password" />
+
+                                        <label asp-for="Input.ConfirmPassword">Confirmar contraseña</label>
+
+                                        <!-- Botón ojo -->
+                                        <button type="button"
+                                                class="password-toggle"
+                                                onclick="togglePassword('confirmPasswordInput', this)"
+                                                aria-label="Mostrar contraseña">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+
+                                    
+                                    </div>
+
+                                    <div class="form-floating mb-3 position-relative">
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                                    </div>
+
+                                    <button type="submit"
+                                            class="btn btn-dark w-100 py-2 fw-semibold">
+                                        Crear cuenta
+                                    </button>
+
+                                    <div class="text-center mt-4 small">
+                                        <span class="text-muted">¿Ya tienes cuenta?</span>
+                                        <a asp-page="./Login"
+                                               asp-route-returnUrl="@Model.ReturnUrl"
+                                               class="fw-semibold text-decoration-none identity-link">
+                                            Inicia sesión
+                                        </a>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

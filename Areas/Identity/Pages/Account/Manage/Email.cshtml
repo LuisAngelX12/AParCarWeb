@@ -1,0 +1,42 @@
+﻿@page
+@model EmailModel
+@{
+    ViewData["Title"] = "Correo electrónico";
+    ViewData["ActivePage"] = ManageNavPages.Email;
+}
+
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+<partial name="_StatusMessage" for="StatusMessage" />
+
+<form method="post" class="mt-3">
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <div class="form-floating mb-3">
+        <input asp-for="Email" class="form-control" disabled />
+        <label asp-for="Email">Correo electrónico actual</label>
+    </div>
+
+    @if (!Model.IsEmailConfirmed)
+    {
+        <button asp-page-handler="SendVerificationEmail"
+                class="btn btn-outline-dark mb-3 w-100">
+            Enviar correo de verificación
+        </button>
+    }
+
+    <div class="form-floating mb-3">
+        <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" />
+        <label asp-for="Input.NewEmail">Nuevo correo electrónico</label>
+        <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+    </div>
+
+    <button asp-page-handler="ChangeEmail"
+            class="btn btn-dark w-100">
+        Cambiar correo electrónico
+    </button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

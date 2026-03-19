@@ -1,0 +1,81 @@
+﻿@model AParCarWeb.Models.Ticket
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h4><i class="bi bi-cash-coin"></i> Confirmar pago en efectivo</h4>
+        </div>
+
+        <div class="card-body">
+
+            <p><strong>Ticket:</strong> #@Model.TicketId</p>
+            <p><strong>Espacio:</strong> @Model.Espacio?.Codigo</p>
+            <p><strong>Entrada:</strong> @Model.FechaEntrada.ToLocalTime()</p>
+
+            <hr />
+
+            <p><strong>Horas:</strong> @ViewBag.Horas</p>
+            <p><strong>Precio hora:</strong> ₡@ViewBag.Tarifa</p>
+
+            @if (ViewBag.Multa > 0)
+            {
+                <p class="text-danger">Multa: ₡@ViewBag.Multa</p>
+            }
+
+            <h3 class="text-success">Total: ₡@ViewBag.Monto</h3>
+
+            <hr />
+
+            <form asp-action="PagarEfectivo" method="post">
+                <input type="hidden" name="ticketId" value="@Model.TicketId" />
+
+                <div class="mb-3">
+                    <label>Monto recibido</label>
+                    <input type="number" step="0.01" class="form-control" id="recibido" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Vuelto</label>
+                    <input type="text" class="form-control" id="vuelto" readonly />
+                </div>
+
+                <div id="alerta" class="alert alert-danger d-none">
+                    Monto insuficiente
+                </div>
+
+                <button type="submit" class="btn btn-success" id="btnConfirmar" disabled>
+                    <i class="bi bi-check-circle"></i>
+                    Confirmar pago
+                </button>
+
+                <a asp-controller="Tickets" asp-action="Index" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const total = @ViewBag.Monto;
+    const inputRecibido = document.getElementById("recibido");
+    const inputVuelto = document.getElementById("vuelto");
+    const alerta = document.getElementById("alerta");
+    const btn = document.getElementById("btnConfirmar");
+
+    inputRecibido.addEventListener("input", function () {
+        let recibido = parseFloat(this.value) || 0;
+        let vuelto = recibido - total;
+
+        if (recibido >= total) {
+            inputVuelto.value = "₡" + vuelto.toFixed(2);
+            alerta.classList.add("d-none");
+            btn.disabled = false;
+        } else {
+            inputVuelto.value = "";
+            alerta.classList.remove("d-none");
+            btn.disabled = true;
+        }
+    });
+</script>

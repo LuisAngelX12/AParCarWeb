@@ -1,0 +1,17 @@
+﻿@model AParCarWeb.Models.Ticket
+
+@{
+    ViewData["Title"] = "Eliminar Ticket";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    ¿Está seguro de eliminar el ticket del vehículo <strong>@Model.Vehiculo?.Placa</strong> en el espacio <strong>@Model.Espacio?.Codigo</strong>?
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="TicketId" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+</form>

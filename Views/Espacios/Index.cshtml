@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AParCarWeb.Models.Espacio>
+
+@{
+    ViewData["Title"] = "Espacios";
+}
+
+<div style="height:30px;"></div>
+
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create")" class="btn btn-primary mb-3">Agregar Espacio</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Zona</th>
+            <th>Ocupado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.Codigo</td>
+                <td>@e.Zona?.Nombre</td>
+                <td>
+                    @if (e.Ocupado)
+                    {
+                        <span class="badge bg-danger">Sí</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">No</span>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = e.EspacioId })" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="@Url.Action("Details", new { id = e.EspacioId })" class="btn btn-sm btn-info">Detalles</a>
+                    <a href="@Url.Action("Delete", new { id = e.EspacioId })" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Parqueos Disponibles";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Parqueos Disponibles</h2>
+
+    <div class="row">
+        @if (Model != null && Model!.Any())
+        {
+            foreach (var parqueo in Model!)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+
+                            <h5 class="card-title">@parqueo.Nombre</h5>
+
+                            <p class="card-text">
+                                <strong>Ubicación:</strong> @parqueo.Ubicacion
+                            </p>
+
+                            <p class="card-text">
+                                <strong>Espacios:</strong>
+                                @(parqueo.Espacios?.Count() ?? 0)
+                            </p>
+
+                            <a asp-controller="Espacios"
+                               asp-action="Index"
+                               asp-route-parqueoId="@parqueo.Id"
+                               class="btn btn-primary w-100">
+                                Ver Espacios
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-warning text-center">
+                    No hay parqueos disponibles.
+                </div>
+            </div>
+        }
+    </div>
+</div>

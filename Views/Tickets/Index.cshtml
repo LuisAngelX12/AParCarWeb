@@ -1,0 +1,166 @@
+﻿@model IEnumerable<AParCarWeb.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<div style="height:30px;"></div>
+
+<h2 class="mb-3">
+    <i class="bi bi-ticket-perforated"></i>
+    @ViewData["Title"]
+</h2>
+
+<!-- FILTROS -->
+<div class="row mb-4 g-3">
+
+    <div class="col-md-3">
+        <label for="estado" class="form-label">Estado</label>
+
+        <select id="estadoFiltro" class="form-select">
+            <option value="">Todos</option>
+            @foreach (var item in (SelectList)ViewData["EstadoList"]!)
+            {
+                <option value="@item.Text">@item.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-9">
+        <label class="form-label">
+            <i class="bi bi-search"></i> Buscar
+        </label>
+
+        <input type="text"
+               id="searchInput"
+               class="form-control"
+               placeholder="Buscar por placa, vehículo, espacio, estado o fecha..." />
+    </div>
+
+</div>
+
+<div class="table-responsive">
+
+    <table id="ticketsTable" class="table table-striped table-hover table-bordered align-middle">
+
+        <thead class="table-light">
+            <tr>
+                <th>Vehículo</th>
+                <th>Placa</th>
+                <th>Espacio</th>
+                <th>Fecha Entrada</th>
+                <th>Fecha Salida</th>
+                <th>Estado</th>
+                <th style="width:120px;">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var ticket in Model)
+            {
+                <tr>
+
+                    <td>
+                        <i class="bi bi-car-front"></i>
+                        @ticket.Vehiculo?.Marca @ticket.Vehiculo?.Modelo
+                    </td>
+
+                    <td>
+                        <span class="badge bg-secondary">
+                            @ticket.Vehiculo?.Placa
+                        </span>
+                    </td>
+
+                    <td>
+                        <i class="bi bi-grid"></i>
+                        @ticket.Espacio?.Codigo
+                    </td>
+
+                    <td>
+                        <i class="bi bi-clock"></i>
+                        @ticket.FechaEntrada.ToString("g")
+                    </td>
+
+                    <td>
+                        @if (ticket.FechaSalida.HasValue)
+                        {
+                            <span>
+                                <i class="bi bi-box-arrow-right"></i>
+                                @ticket.FechaSalida.Value.ToString("g")
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">-</span>
+                        }
+                    </td>
+
+                    <td>
+
+                        @if (ticket.Estado == "Activo")
+                        {
+                            <span class="badge bg-success">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@ticket.Estado</span>
+                        }
+
+                    </td>
+
+                    <td>
+
+                        <a class="btn btn-sm btn-success"
+                               href="@Url.Action("ConfirmarEfectivo", "Pagos", new { ticketId = ticket.TicketId })">
+
+                            <i class="bi bi-cash-coin"></i>
+                            Efectivo
+                        </a>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+    const searchInput = document.getElementById("searchInput");
+    const estadoFiltro = document.getElementById("estadoFiltro");
+
+    searchInput.addEventListener("keyup", filtrarTabla);
+    estadoFiltro.addEventListener("change", filtrarTabla);
+
+    function filtrarTabla() {
+
+        let texto = searchInput.value.toLowerCase();
+        let estado = estadoFiltro.value.toLowerCase();
+
+        let filas = document.querySelectorAll("#ticketsTable tbody tr");
+
+        filas.forEach(fila => {
+
+            let contenido = fila.innerText.toLowerCase();
+
+            let estadoCelda = fila.children[5].innerText.toLowerCase();
+
+            let coincideBusqueda = contenido.includes(texto);
+            let coincideEstado = estado === "" || estadoCelda.includes(estado);
+
+            if (coincideBusqueda && coincideEstado) {
+                fila.style.display = "";
+            } else {
+                fila.style.display = "none";
+            }
+
+        });
+
+    }
+
+</script>

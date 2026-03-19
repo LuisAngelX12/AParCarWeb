@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AParCarWeb.Models.ClienteVehiculo>
+
+@{
+    ViewData["Title"] = "Historial de Clientes y Vehículos";
+}
+
+<div style="height:30px;"></div>
+
+<h2>@ViewData["Title"]</h2>
+
+<!-- Input de búsqueda -->
+<div class="mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Buscar cliente, vehículo o placa..." />
+</div>
+
+<table class="table table-bordered table-striped" id="historialTable">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Vehículo</th>
+            <th>Placa</th>
+            <th>Fecha Inicio</th>
+            <th>Activo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Cliente!.Nombre</td>
+                <td>@item.Vehiculo!.Marca @item.Vehiculo.Modelo</td>
+                <td>@item.Vehiculo.Placa</td>
+                <td>@item.FechaInicio.ToShortDateString()</td>
+                <td>@(item.Activo ? "Sí" : "No")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Script de filtrado -->
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const table = document.getElementById('historialTable').getElementsByTagName('tbody')[0];
+
+    searchInput.addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        const rows = table.getElementsByTagName('tr');
+
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName('td');
+            let match = false;
+
+            for (let j = 0; j < cells.length; j++) {
+                if (cells[j].textContent.toLowerCase().includes(filter)) {
+                    match = true;
+                    break;
+                }
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+</script>

@@ -1,0 +1,79 @@
+﻿@model AParCarWeb.Models.Zona
+
+@{
+    ViewData["Title"] = "Editar Zona";
+}
+
+<div style="height:30px;"></div>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <form asp-action="Edit" method="post" class="card shadow-lg p-4 rounded-4">
+
+        <input type="hidden" asp-for="ZonaId" />
+
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <!-- NOMBRE -->
+        <div class="mb-3">
+
+            <label asp-for="Nombre" class="form-label fw-semibold">
+                Nombre de la zona
+            </label>
+
+            <input asp-for="Nombre"
+                   class="form-control"
+                   placeholder="Ej: Zona A, Zona VIP, Nivel 1" />
+
+            <small class="text-muted">
+                Nombre identificador de la zona del parqueo
+            </small>
+
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+
+        </div>
+
+        <!-- DESCRIPCION -->
+        <div class="mb-4">
+
+            <label asp-for="Descripcion" class="form-label fw-semibold">
+                Descripción
+            </label>
+
+            <textarea asp-for="Descripcion"
+                      class="form-control"
+                      rows="3"
+                      placeholder="Detalles adicionales de la zona"></textarea>
+
+            <small class="text-muted">
+                Información adicional sobre esta zona
+            </small>
+
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+
+        </div>
+
+        <!-- BOTONES -->
+        <div class="d-flex justify-content-between mt-4">
+
+            <a href="@Url.Action("Index")"
+                   class="btn btn-outline-secondary px-4">
+                Cancelar
+            </a>
+
+            <button type="submit"
+                    class="btn btn-primary px-4">
+                Actualizar zona
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

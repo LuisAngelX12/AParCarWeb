@@ -1,0 +1,246 @@
+﻿@model AParCarWeb.ViewModels.DashboardOperadorVM
+
+@{
+    ViewData["Title"] = "Dashboard Operador";
+}
+
+<div style="height:60px;"></div>
+
+@if (ViewBag.TicketsExcedidos.Count > 0)
+{
+    <div id="alertaExcedidos" class="alert alert-danger alert-dismissible fade show">
+
+        <i class="bi bi-exclamation-octagon"></i>
+        Hay @ViewBag.TicketsExcedidos.Count vehículos con tiempo excedido.
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+
+<div class="container">
+
+    <h2 class="mb-4">
+        <i class="bi bi-speedometer2"></i> Panel del Operador
+    </h2>
+
+    <div class="row">
+
+        <!-- Espacios Disponibles -->
+        <div class="col">
+            <div class="card text-bg-success mb-3 shadow-sm">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-p-square-fill fs-1"></i>
+
+                    <h5 class="mt-2">Espacios Disponibles</h5>
+
+                    <h2>@Model.EspaciosDisponibles</h2>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Espacios Ocupados -->
+        <div class="col">
+            <div class="card text-bg-danger mb-3 shadow-sm">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-car-front-fill fs-1"></i>
+
+                    <h5 class="mt-2">Espacios Ocupados</h5>
+
+                    <h2>@Model.EspaciosOcupados</h2>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehículos Dentro -->
+        <div class="col">
+            <div class="card text-bg-primary mb-3 shadow-sm">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-car-front fs-1"></i>
+
+                    <h5 class="mt-2">Vehículos Dentro</h5>
+
+                    <h2>@Model.VehiculosDentro</h2>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Entradas Hoy -->
+        <div class="col">
+            <div class="card text-bg-warning mb-3 shadow-sm">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-box-arrow-in-right fs-1"></i>
+
+                    <h5 class="mt-2">Entradas Hoy</h5>
+
+                    <h2>@Model.EntradasHoy</h2>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Salidas Hoy -->
+        <div class="col">
+            <div class="card text-bg-secondary mb-3 shadow-sm">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-box-arrow-right fs-1"></i>
+
+                    <h5 class="mt-2">Salidas Hoy</h5>
+
+                    <h2>@Model.SalidasHoy</h2>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <hr />
+
+    <h4 class="mb-3">
+        <i class="bi bi-lightning-charge"></i> Acciones Rápidas
+    </h4>
+
+    <div class="row">
+
+        <!-- Registrar Entrada -->
+        <div class="col-md-4">
+            <a asp-controller="Tickets" asp-action="Create"
+               class="btn btn-outline-primary w-100 mb-2">
+
+                <i class="bi bi-plus-circle"></i>
+                Registrar Entrada
+
+            </a>
+        </div>
+
+        <!-- Ver Tickets -->
+        <div class="col-md-4">
+            <a asp-controller="Tickets" asp-action="Index"
+               class="btn btn-outline-secondary w-100 mb-2">
+
+                <i class="bi bi-ticket-perforated"></i>
+                Ver Tickets Activos
+
+            </a>
+        </div>
+
+        <!-- Ver Espacios -->
+        <div class="col-md-4">
+            <a asp-controller="Espacios" asp-action="Index"
+               class="btn btn-outline-dark w-100 mb-2">
+
+                <i class="bi bi-grid"></i>
+                Ver Espacios
+
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<hr />
+
+<h4 class="mt-4">
+    <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+    Vehículos con tiempo excedido
+</h4>
+
+@if (ViewBag.TicketsExcedidos.Count == 0)
+{
+    <div class="alert alert-success">
+        <i class="bi bi-check-circle"></i>
+        No hay vehículos con tiempo excedido.
+    </div>
+}
+else
+{
+
+    <table class="table table-striped table-bordered">
+
+        <thead class="table-danger">
+            <tr>
+
+                <th><i class="bi bi-car-front"></i> Placa</th>
+
+                <th><i class="bi bi-geo-alt"></i> Espacio</th>
+
+                <th><i class="bi bi-clock"></i> Hora Entrada</th>
+
+                <th><i class="bi bi-gear"></i> Acción</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var ticket in ViewBag.TicketsExcedidos)
+            {
+                <tr>
+
+                    <td>@ticket.Vehiculo</td>
+
+                    <td>@ticket.Espacio</td>
+
+                    <td>@ticket.FechaEntrada</td>
+
+                    <td>
+
+                        <a asp-controller="Tickets"
+                           asp-action="Details"
+                           asp-route-id="@ticket.TicketId"
+                           class="btn btn-sm btn-warning">
+
+                            <i class="bi bi-eye"></i>
+                            Ver
+
+                        </a>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+}
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const alerta = document.getElementById("alertaExcedidos");
+
+        if (!alerta) return;
+
+        alerta.classList.add("fade-alert");
+
+        // Fade In
+        setTimeout(() => {
+            alerta.classList.add("show");
+        }, 100);
+
+        // Fade Out después de 5 segundos
+        setTimeout(() => {
+            alerta.classList.remove("show");
+
+            setTimeout(() => {
+                alerta.style.display = "none";
+            }, 600);
+
+        }, 5000);
+
+    });
+
+</script>

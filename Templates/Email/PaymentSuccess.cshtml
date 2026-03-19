@@ -1,0 +1,97 @@
+﻿@model AParCarWeb.Templates.Email.ViewModels.PaymentSuccessViewModel
+
+<div style="font-family: Arial, sans-serif; background:#f4f6f8; padding:20px;">
+    
+    <div style="max-width:650px; margin:auto; background:#ffffff; border-radius:10px; padding:25px; border:1px solid #ddd;">
+        
+        <!-- HEADER CON LOGO -->
+        <table width="100%" style="border-bottom:2px solid #198754; margin-bottom:20px;">
+            <tr>
+                <td>
+                    <img src="cid:logo_aparcar" style="width:120px;" />
+                    <br />
+                    <small style="color:#777;">Sistema de Parqueo Inteligente</small>
+                </td>
+                <td style="text-align:right;">
+                    <h3 style="margin:0;">RECIBO DE PAGO</h3>
+                    <small style="color:#777;">@Model.Fecha</small>
+                </td>
+            </tr>
+        </table>
+
+        <!-- CLIENTE -->
+        <table width="100%" style="margin-bottom:20px;">
+            <tr>
+                <td>
+                    <strong>Cliente:</strong><br />
+                    @Model.UserName
+                </td>
+                <td style="text-align:right;">
+                    <strong>Estado:</strong><br />
+                    <span style="color:green;">✔ Pagado</span>
+                </td>
+            </tr>
+        </table>
+
+        <!-- DETALLE -->
+        <p>Tu pago ha sido procesado correctamente. Aquí tienes el desglose:</p>
+
+        <!-- TABLA DETALLADA -->
+        <table width="100%" cellpadding="10" style="border-collapse:collapse; margin-top:15px;">
+            <thead style="background:#198754; color:white;">
+                <tr>
+                    <th align="left">Concepto</th>
+                    <th align="center">Cantidad</th>
+                    <th align="right">Precio</th>
+                    <th align="right">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr style="border-bottom:1px solid #ddd;">
+                    <td>Tiempo de parqueo</td>
+                    <td align="center">@Model.Horas h</td>
+                    <td align="right">₡@Model.PrecioHora</td>
+                    <td align="right">₡@(Model.Horas* Model.PrecioHora)</td>
+                </tr>
+
+                @if (Model?.Multa > 0)
+                {
+                    <tr style="border-bottom:1px solid #ddd;">
+                        <td>Multa por exceso</td>
+                        <td align="center">1</td>
+                        <td align="right" style="color:#dc3545;">₡@Model.Multa</td>
+                        <td align="right" style="color:#dc3545;">₡@Model.Multa</td>
+                    </tr>
+                }
+
+                <tr style="border-bottom:1px solid #ddd;">
+                    <td colspan="3" align="right"><strong>Total</strong></td>
+                    <td align="right">
+                        <strong style="color:#198754;">₡@Model?.Amount</strong>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <!-- INFO EXTRA -->
+        <div style="margin-top:20px; font-size:13px; color:#555;">
+            <p><strong>Detalle:</strong> @Model?.Detalle</p>
+            <p><strong>Método de pago:</strong> @Model?.MetodoPago</p>
+            <p><strong>Referencia:</strong> @Model?.Referencia</p>
+        </div>
+
+        <!-- MENSAJE FINAL -->
+        <div style="margin-top:25px;">
+            <p>Gracias por utilizar AParCar</p>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="border-top:1px solid #ddd; margin-top:25px; padding-top:15px; text-align:center; font-size:12px; color:#777;">
+            <p>AParCar © 2026</p>
+            <p>Este correo es un comprobante automático.</p>
+        </div>
+
+    </div>
+</div>
