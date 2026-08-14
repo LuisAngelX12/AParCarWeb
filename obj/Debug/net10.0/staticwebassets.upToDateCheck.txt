@@ -81,6 +81,10 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+C:\Users\X_X\source\repos\AParCarWeb\wwwroot\css\identity.css
+C:\Users\X_X\source\repos\AParCarWeb\wwwroot\css\parking.css
+C:\Users\X_X\source\repos\AParCarWeb\wwwroot\css\site.css
+C:\Users\X_X\source\repos\AParCarWeb\wwwroot\favicon.ico
 C:\Users\X_X\source\repos\AParCarWeb\wwwroot\js\identity.js
 C:\Users\X_X\source\repos\AParCarWeb\wwwroot\js\parking.js
 C:\Users\X_X\source\repos\AParCarWeb\wwwroot\js\site.js
@@ -140,7 +144,3 @@ C:\Users\X_X\source\repos\AParCarWeb\wwwroot\lib\jquery\dist\jquery.js
 C:\Users\X_X\source\repos\AParCarWeb\wwwroot\lib\jquery\dist\jquery.min.js
 C:\Users\X_X\source\repos\AParCarWeb\wwwroot\lib\jquery\dist\jquery.min.map
 C:\Users\X_X\source\repos\AParCarWeb\wwwroot\lib\jquery\LICENSE.txt
-C:\Users\X_X\source\repos\AParCarWeb\wwwroot\css\identity.css
-C:\Users\X_X\source\repos\AParCarWeb\wwwroot\favicon.ico
-C:\Users\X_X\source\repos\AParCarWeb\wwwroot\css\site.css
-C:\Users\X_X\source\repos\AParCarWeb\wwwroot\css\parking.css
