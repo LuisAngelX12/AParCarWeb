@@ -238,7 +238,7 @@
                     </td>
 
                     <td>
-                        @t.FechaEntrada.ToCR12H()
+                        @(AParCarWeb.Extensions.DateTimeExtensions.ToCR12H((DateTime)t.FechaEntrada))
                     </td>
 
                     <td>

@@ -191,7 +191,7 @@
                             </td>
                             <td>
                                 <i class="bi bi-clock"></i>
-                                @n.Fecha.ToCR12H()
+                                @(AParCarWeb.Extensions.DateTimeExtensions.ToCR12H((DateTime)n.Fecha))
                             </td>
                         </tr>
                     }
@@ -249,7 +249,7 @@ else
 
                             <td>
                                 <i class="bi bi-clock"></i>
-                                @r.FechaGeneracion.ToCR12H()
+                                @(AParCarWeb.Extensions.DateTimeExtensions.ToCR12H((DateTime)r.FechaGeneracion))
                             </td>
 
                         </tr>

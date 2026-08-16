@@ -112,12 +112,22 @@
 
                     <td>
 
-                        <a class="btn btn-sm btn-success"
+                        @if (ticket.Estado == "Activo")
+                        {
+                            <a class="btn btn-sm btn-success btn-accion"
                                href="@Url.Action("ConfirmarEfectivo", "Pagos", new { ticketId = ticket.TicketId })">
 
-                            <i class="bi bi-cash-coin"></i>
-                            Efectivo
-                        </a>
+                                <i class="bi bi-cash-coin"></i>
+                                Efectivo
+                            </a>
+                        }
+                        else if (ticket.Estado == "Pagado")
+                        {
+                            <span class="btn btn-sm btn-primary btn-accion">
+                                <i class="bi bi-check-circle"></i>
+                                Pagado
+                            </span>
+                        }
 
                     </td>
 

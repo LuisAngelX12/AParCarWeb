@@ -50,14 +50,16 @@
                 <div class="col-md-6">
                     <label class="text-muted fw-semibold">Fecha Entrada</label>
                     <div class="fs-5">
-                        @Model.FechaEntrada.ToString("dd/MM/yyyy HH:mm")
+                        @Model.FechaEntrada.ToString("dd/MM/yyyy hh:mm tt")
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <label class="text-muted fw-semibold">Fecha Salida</label>
                     <div class="fs-5">
-                        @(Model.FechaSalida.HasValue? Model.FechaSalida.Value.ToString("dd/MM/yyyy HH:mm") : "-")
+                        @(Model.FechaSalida.HasValue
+                            ? Model.FechaSalida.Value.ToString("dd/MM/yyyy hh:mm tt")
+                            : "-")
                     </div>
                 </div>
 
